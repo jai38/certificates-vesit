@@ -28,7 +28,7 @@ app.post("/", (req, res) => {
   }).single("allFiles");
   upload(req, res, (err) => {
     // const img = fs.readFileSync(req.file.path,'utf-8');
-    res.sendFile(__dirname + "\\" + req.file.path);
+    res.sendFile(__dirname + "/" + req.file.path);
   });
 });
 const PORT = process.env.PORT || 5000;
