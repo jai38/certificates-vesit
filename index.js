@@ -28,5 +28,5 @@ app.post("/", (req, res) => {
     res.send("Done");
   });
 });
-console.log();
-app.listen(5000, console.log("On port 5000"));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, console.log(`On port 5000${PORT}`));
