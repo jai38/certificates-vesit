@@ -1,39 +1,37 @@
 body {
-    font-family: Verdana, sans-serif;
-  }
+  font-family: Verdana, sans-serif;
+}
 
-  
 /* Login Page */
 
-.navbar{
-    background-color: #ffbf47;
-  }
-  
-  .card {
-    margin: 6% 26%;
-    border-color: #ffbf47;
-    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2);
-    padding-bottom: 5%;
-  }
-  
-  h1 {
-    text-align: center;
-  }
-  
-  h4 {
-    padding-top: 3.5%;
-    text-align: center;
-  }
-  
-  .vesname {
-    text-align: center;
-    font-family: sans-serif;
-    color: #000;
-    font-size: 150%;
-    font-weight: bold;
-  }
-  
-  form {
-    text-align: center;
-  }
-  
+.navbar {
+  background-color: #ffbf47;
+}
+
+.card {
+  margin: 6% 26%;
+  border-color: #ffbf47;
+  box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2);
+  padding-bottom: 5%;
+}
+
+h1 {
+  text-align: center;
+}
+
+h4 {
+  padding-top: 3.5%;
+  text-align: center;
+}
+
+.vesname {
+  text-align: center;
+  font-family: sans-serif;
+  color: #000;
+  font-size: 150%;
+  font-weight: bold;
+}
+
+form {
+  text-align: center;
+}
