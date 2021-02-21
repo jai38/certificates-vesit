@@ -8,7 +8,7 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
   let uploadCertis = multer({
     storage: storage,
-  }).array("allFiles");
+  }).array("cerits");
   uploadCertis(req, res, (err) => {
     res.render("uploadCsv");
   });
