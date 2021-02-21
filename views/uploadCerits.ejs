@@ -4,16 +4,139 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/upload.css" type='text/css'>
     <title>Document</title>
   </head>
   <body>
-    <h3>Hello world</h3>
-    <form action="/uploadCerits" method="POST" enctype="multipart/form-data">
-      <label for="allFiles">Upload certificates: </label>
-      <input type="file" name="allFiles" multiple="multiple" accept="image/*" />
-      <br />
-      <br />
-      <input type="submit" value="submit" name="btn" />
-    </form>
+      <!-- Upload page -->
+  <div class="uploadPage">
+    <nav class="navbar  justify-content-between">
+      <img src="/images/logo.png" alt="" width="60px" height="65px">
+      <form class="form-inline">
+        <button class="btn btn-danger btn-lg" type="submit">LOGOUT</button>
+      </form>
+    </nav>
+
+    <div class="container-fluid">
+
+      <div class="slideshow-container">
+        <div class="mySlides">
+          <div class="numbertext">1 / 3</div>
+          <img src="/images/col_view.jpg">
+          <div class="text"></div>
+        </div>
+
+        <div class="mySlides">
+          <div class="numbertext">2 / 3</div>
+          <img src="/images/Front_view.jpg">
+          <div class="text"></div>
+        </div>
+
+        <div class="mySlides">
+          <div class="numbertext">3 / 3</div>
+          <img src="/images/Amphi.jpg">
+          <div class="text"></div>
+        </div>
+
+      </div>
+      <br>
+
+      <div style="text-align:center">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+
+      <br>
+      <!-- <form action="/uploadCerits" method="POST" enctype="multipart/form-data">
+        <label for="allFiles">Upload certificates: </label>
+        <input type="file" name="allFiles" multiple="multiple" accept="image/*" />
+        <br />
+        <br />
+        <input type="submit" value="submit" name="btn" />
+      </form> -->
+
+      <form action="/uploadmultiple" enctype="multipart/form-data" method="POST" id="uploadForm">
+        <div class="file-upload">
+          <span class="file-upload__label">
+            <h4>Upload Files : </h4>
+          </span>
+          <input class="file-upload__input btalign btn-lg" type="file" name="myFiles" id="myFiles" multiple accept="image/*">
+          <input type="submit" class="selectFiles  btn-lg" value="Upload your files">
+        </div>
+      </form>
+
+      <div class="pbar">
+        <div class="progress-bar" id="progressBar">
+          <div class="progress-bar-fill ">
+            <span class="progress-bar-text">
+              0%
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <script>
+    var slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("dot");
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) { slideIndex = 1 }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " active";
+      setTimeout(showSlides, 3000); // Change image every 2 seconds
+    }
+
+
+
+
+    Array.prototype.forEach.call(
+      document.querySelectorAll(".file-upload__button"),
+      function (button) {
+        const hiddenInput = button.parentElement.querySelector(
+          ".file-upload__input"
+        );
+        const label = button.parentElement.querySelector(".file-upload__label");
+        const defaultLabelText = "No file(s) selected";
+
+        // Set default text for label
+        label.textContent = defaultLabelText;
+        label.title = defaultLabelText;
+
+        button.addEventListener("click", function () {
+          hiddenInput.click();
+        });
+
+        hiddenInput.addEventListener("change", function () {
+          const filenameList = Array.prototype.map.call(hiddenInput.files, function (
+            file
+          ) {
+            return file.name;
+          });
+
+          label.textContent = filenameList.join(", ") || defaultLabelText;
+          label.title = label.textContent;
+        });
+      }
+    );
+  </script>
+
   </body>
 </html>
