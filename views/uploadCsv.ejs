@@ -62,7 +62,12 @@
       <input type="submit" value="submit" name="btn" />
     </form> -->
 
-        <form action="/uploadCSV" method="post">
+        <form
+          action="/uploadCsv"
+          method="post"
+          enctype="multipart/form-data"
+          id="uploadForm"
+        >
           <div class="file-upload">
             <span class="file-upload__label">
               <h4>Upload Sheet :</h4>
@@ -70,7 +75,7 @@
             <input
               class="file-upload__input btalign btn-lg"
               type="file"
-              name="myFile[]"
+              name="csv"
               id="myFile"
               accept=".csv"
             />

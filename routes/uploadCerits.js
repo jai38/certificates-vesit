@@ -10,7 +10,7 @@ router.post("/", (req, res) => {
     storage: storage,
   }).array("cerits");
   uploadCertis(req, res, (err) => {
-    res.render("uploadCsv");
+    res.redirect("./uploadCsv");
   });
 });
 

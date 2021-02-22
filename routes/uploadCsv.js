@@ -1,14 +1,12 @@
 const router = require("express").Router();
 const storage = require("../storage");
 const multer = require("multer");
+const papaparse = require("papaparse");
 const fs = require("fs");
 let users = [];
 let fileName;
-var upload = multer({
-  storage: storage,
-});
-const uploadUID = async (fileName) => {
-  const csv = fs.readFileSync(`../uploads/${fileName}`, "utf-8");
+const uploadUID = async () => {
+  const csv = fs.readFileSync(`./uploads/${fileName}`, "utf-8");
   papaparse.parse(csv, {
     complete: (sheet) => {
       sheets = sheet.data.shift();
@@ -17,6 +15,7 @@ const uploadUID = async (fileName) => {
   });
   sheets.forEach(async (c) => {
     let currentUser = {
+      email: c[5],
       UID: c[0],
       name: c[3],
       year: 2020,
@@ -26,15 +25,19 @@ const uploadUID = async (fileName) => {
   return users;
 };
 router.get("/", (req, res) => {
-  res.render("dashboard");
+  res.render("uploadCsv");
 });
-router.post("/", upload.single("csv"), (req, res, next) => {
-  const file = req.file;
-  console.log(file);
-  fileName = file.filename;
-  users = uploadUID();
-  console.log(users);
-  res.send("done");
+router.post("/", (req, res) => {
+  let uploadCertis = multer({
+    storage: storage,
+  }).single("csv");
+  uploadCertis(req, res, async (err) => {
+    const file = req.file;
+    fileName = file.filename;
+    res.send("done");
+    users = await uploadUID();
+    console.log(users);
+  });
 });
 
 module.exports = router;
