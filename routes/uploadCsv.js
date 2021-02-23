@@ -3,8 +3,27 @@ const storage = require("../storage");
 const multer = require("multer");
 const papaparse = require("papaparse");
 const fs = require("fs");
-let users = [];
+const dotenv = require('dotenv').config();
+const firebase = require('firebase/app');
+require('firebase/firestore');
+
+// Initialize Firebase App only once
+if (!firebase.apps.length) {
+  firebase.initializeApp({
+    apiKey: process.env.DISCORD_APP_FIREBASE_API_KEY,
+    authDomain: process.env.DISCORD_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.DISCORD_APP_FIREBASE_PROJECT_ID
+  });
+} else {
+  firebase.app();
+}
+
+// Handle for Cloud Firsestore
+const db = firebase.firestore();
+
+let certificates = []; // Initialize JSON array
 let fileName;
+
 const uploadUID = async () => {
   const csv = fs.readFileSync(`./uploads/${fileName}`, "utf-8");
   papaparse.parse(csv, {
@@ -14,29 +33,54 @@ const uploadUID = async () => {
     },
   });
   sheets.forEach(async (c) => {
-    let currentUser = {
+    let currentCerti = {
       email: c[5],
       UID: c[0],
       name: c[3],
       year: 2020,
     };
-    users.push(currentUser);
+    certificates.push(currentCerti);
   });
-  return users;
+  return certificates;
 };
+
 router.get("/", (req, res) => {
   res.render("uploadCsv");
 });
+
 router.post("/", (req, res) => {
   let uploadCertis = multer({
     storage: storage,
   }).single("csv");
+  
   uploadCertis(req, res, async (err) => {
     const file = req.file;
     fileName = file.filename;
     res.send("done");
-    users = await uploadUID();
-    console.log(users);
+    certificates = await uploadUID();
+    
+    for (i=0;i<(certificates.length-1);i++) {
+      
+      const certiUID = certificates[i].UID;
+      const certiName = certificates[i].name;
+      const certiYear = certificates[i].year;
+      const link = [];
+
+      db.collection("Users").get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            var certiRef = db.collection("Users").doc(doc.id);
+            certiRef.update({
+              certificates: firebase.firestore.FieldValue.arrayUnion({
+                "UID": certiUID,
+                "certiYear": certiYear,
+                "name": certiName,
+                "link": link
+              })
+            });
+          });
+        });
+    }
   });
 });
 
