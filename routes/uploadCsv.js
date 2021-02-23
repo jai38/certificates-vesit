@@ -58,9 +58,9 @@ router.post("/", (req, res) => {
     fileName = file.filename;
     res.send("done");
     certificates = await uploadUID();
-    
-    for (i=0;i<(certificates.length-1);i++) {
+    /*for (i=0;i<(certificates.length-1);i++) {
       
+      const emailID = certificates[i].email;
       const certiUID = certificates[i].UID;
       const certiName = certificates[i].name;
       const certiYear = certificates[i].year;
@@ -70,17 +70,28 @@ router.post("/", (req, res) => {
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             var certiRef = db.collection("Users").doc(doc.id);
-            certiRef.update({
-              certificates: firebase.firestore.FieldValue.arrayUnion({
-                "UID": certiUID,
-                "certiYear": certiYear,
-                "name": certiName,
-                "link": link
-              })
-            });
+              certiRef.update({
+                certificates: firebase.firestore.FieldValue.arrayUnion({
+                  "UID": certiUID,
+                  "certiYear": certiYear,
+                  "name": certiName,
+                  "link": link
+                })
+              });    
           });
         });
+    }*/
+    for (i = 0; i< certificates.length - 1 ; i++) {
+      const link = [];
+
+      // Send each row to firebase, under User/{emailID}/Certificates/{UID}
+      const certi = await db.doc(`Users/${certificates[i].email}/Certificates/${certificates[i].UID}`).set({
+        name: certificates[i].name,
+        year: certificates[i].year,
+        link: link,
+      });
     }
+
   });
 });
 
