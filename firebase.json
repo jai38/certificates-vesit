@@ -1,0 +1,21 @@
+{
+  "hosting": [
+    {
+      "public": "public",
+      "rewrites": [
+        {
+          "source": "/",
+          "function": "main"
+        },
+        {
+          "source": "/csv",
+          "function": "main"
+        },
+        {
+          "source": "/certis",
+          "function": "main"
+        }
+      ]
+    }
+  ]
+}

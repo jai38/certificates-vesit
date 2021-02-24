@@ -3,14 +3,14 @@ const storage = require("../storage");
 const multer = require("multer");
 
 router.get("/", (req, res) => {
-  res.render("uploadCerits");
+  res.render("certis");
 });
 router.post("/", (req, res) => {
   let uploadCertis = multer({
     storage: storage,
-  }).array("cerits");
+  }).array("certis");
   uploadCertis(req, res, (err) => {
-    res.redirect("./uploadCsv");
+    res.render("csv");
   });
 });
 

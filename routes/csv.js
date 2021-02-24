@@ -3,16 +3,16 @@ const storage = require("../storage");
 const multer = require("multer");
 const papaparse = require("papaparse");
 const fs = require("fs");
-const dotenv = require('dotenv').config();
-const firebase = require('firebase/app');
-require('firebase/firestore');
+const dotenv = require("dotenv").config();
+const firebase = require("firebase/app");
+require("firebase/firestore");
 
 // Initialize Firebase App only once
 if (!firebase.apps.length) {
   firebase.initializeApp({
     apiKey: process.env.DISCORD_APP_FIREBASE_API_KEY,
     authDomain: process.env.DISCORD_APP_FIREBASE_AUTH_DOMAIN,
-    projectId: process.env.DISCORD_APP_FIREBASE_PROJECT_ID
+    projectId: process.env.DISCORD_APP_FIREBASE_PROJECT_ID,
   });
 } else {
   firebase.app();
@@ -45,14 +45,14 @@ const uploadUID = async () => {
 };
 
 router.get("/", (req, res) => {
-  res.render("uploadCsv");
+  res.render("csv");
 });
 
 router.post("/", (req, res) => {
   let uploadCertis = multer({
     storage: storage,
   }).single("csv");
-  
+
   uploadCertis(req, res, async (err) => {
     const file = req.file;
     fileName = file.filename;
@@ -81,17 +81,20 @@ router.post("/", (req, res) => {
           });
         });
     }*/
-    for (i = 0; i< certificates.length - 1 ; i++) {
+    for (i = 0; i < certificates.length - 1; i++) {
       const link = [];
 
       // Send each row to firebase, under User/{emailID}/Certificates/{UID}
-      const certi = await db.doc(`Users/${certificates[i].email}/Certificates/${certificates[i].UID}`).set({
-        name: certificates[i].name,
-        year: certificates[i].year,
-        link: link,
-      });
+      const certi = await db
+        .doc(
+          `Users/${certificates[i].email}/Certificates/${certificates[i].UID}`
+        )
+        .set({
+          name: certificates[i].name,
+          year: certificates[i].year,
+          link: link,
+        });
     }
-
   });
 });
 
