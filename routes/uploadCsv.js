@@ -82,8 +82,7 @@ router.post("/", (req, res) => {
         });
     }*/
     for (i = 0; i< certificates.length - 1 ; i++) {
-      const link = [];
-
+      const link = []; // To store the links for the certificates
       // Send each row to firebase, under User/{emailID}/Certificates/{UID}
       const certi = await db.doc(`Users/${certificates[i].email}/Certificates/${certificates[i].UID}`).set({
         name: certificates[i].name,
@@ -91,7 +90,6 @@ router.post("/", (req, res) => {
         link: link,
       });
     }
-
   });
 });
 
