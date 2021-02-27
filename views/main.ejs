@@ -11,6 +11,7 @@
       crossorigin="anonymous"
     />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="./../clientJS/certis.js"></script>
     <link rel="stylesheet" href="/css/main.css" type="text/css" />
     <title>Document</title>
   </head>
@@ -23,17 +24,19 @@
       </nav>
 
       <div class="card">
+        <%- include('./messages') %>
         <div class="container-fluid">
           <br /><br />
           <h1>Log In</h1>
           <h4>Use your VES Account to Log In</h4>
           <br /><br />
-          <form class="form">
+          <form action="/" method="POST" class="form">
             <div class="form-group">
               <input
                 style="width: 62.5%; margin-left: 20%"
                 class="form-control"
                 type="email"
+                name="email"
                 id="username"
                 placeholder="society.vesit@ves.ac.in"
                 value=".vesit@ves.ac.in"
@@ -44,6 +47,7 @@
               <input
                 style="width: 62.5%; margin-left: 20%"
                 type="password"
+                name="password"
                 id="password"
                 class="form-control"
                 placeholder="Password"
@@ -51,7 +55,7 @@
               />
             </div>
 
-            <button class="but btn btn-warning btn-lg" type="button">
+            <button class="but btn btn-warning btn-lg" type="submit">
               Log In
             </button>
           </form>

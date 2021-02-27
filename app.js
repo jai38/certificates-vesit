@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 
 app.set("view engine", "ejs");
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json({ limit: "50mb" }));
 app.use(express.static(__dirname + "\\public"));
 app.use("/", require("./routes/main"));
 app.use("/certis", require("./routes/certis"));

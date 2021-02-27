@@ -25,6 +25,7 @@
       </nav>
 
       <div class="container-fluid">
+        <%- include('messages') %>
         <div class="slideshow-container">
           <div class="mySlides">
             <div class="numbertext">1 / 3</div>
@@ -67,6 +68,10 @@
           method="POST"
           id="uploadForm"
         >
+          <% if(typeof count != 'undefined') { %>
+          <p id="countInP" style="display: none"><%= count %></p>
+          <% } %>
+          <input type="text" name="count" id="count" style="display: none" />
           <div class="file-upload">
             <span class="file-upload__label">
               <h4>Upload Files :</h4>
@@ -98,6 +103,10 @@
     </div>
 
     <script>
+      document.getElementById("count").value = document.getElementById(
+        "countInP"
+      ).innerHTML;
+      console.log(document.getElementById("count"));
       var slideIndex = 0;
       showSlides();
 

@@ -23,8 +23,13 @@ const db = firebase.firestore();
 
 let certificates = []; // Initialize JSON array
 let fileName;
-
+let flag = true;
+let errors = [];
+let finalNums = [];
+let rowNum = 0;
 const uploadUID = async () => {
+  finalNums = [];
+  rowNum = 0;
   const csv = fs.readFileSync(`./uploads/${fileName}`, "utf-8");
   papaparse.parse(csv, {
     complete: (sheet) => {
@@ -32,16 +37,26 @@ const uploadUID = async () => {
       sheets = sheet.data;
     },
   });
+  sheets.pop();
   sheets.forEach(async (c) => {
+    rowNum++;
     let currentCerti = {
       email: c[5],
       UID: c[0],
       name: c[3],
       year: 2020,
     };
+    if (!(c[5] && c[0] && c[3])) {
+      flag = false;
+      finalNums.push(rowNum + 1);
+    } else if (c[5] == "" || c[0] == "" || c[3] == "") {
+      flag = false;
+      finalNums.push(rowNum + 1);
+    }
     certificates.push(currentCerti);
   });
-  return certificates;
+  if (flag) return certificates;
+  return -1;
 };
 
 router.get("/", (req, res) => {
@@ -56,7 +71,6 @@ router.post("/", (req, res) => {
   uploadCertis(req, res, async (err) => {
     const file = req.file;
     fileName = file.filename;
-    res.send("done");
     certificates = await uploadUID();
     /*for (i=0;i<(certificates.length-1);i++) {
       
@@ -81,19 +95,29 @@ router.post("/", (req, res) => {
           });
         });
     }*/
-    for (i = 0; i < certificates.length - 1; i++) {
-      const link = [];
+    if (flag) {
+      errors.push({
+        msg: `You are supposed to upload ${rowNum} certificates below`,
+      });
+      res.render("certis", { errors, count: rowNum });
+      for (i = 0; i < certificates.length - 1; i++) {
+        const link = [];
 
-      // Send each row to firebase, under User/{emailID}/Certificates/{UID}
-      const certi = await db
-        .doc(
-          `Users/${certificates[i].email}/Certificates/${certificates[i].UID}`
-        )
-        .set({
-          name: certificates[i].name,
-          year: certificates[i].year,
-          link: link,
-        });
+        // Send each row to firebase, under User/{emailID}/Certificates/{UID}
+        const certi = await db
+          .doc(
+            `Users/${certificates[i].email}/Certificates/${certificates[i].UID}`
+          )
+          .set({
+            name: certificates[i].name,
+            year: certificates[i].year,
+            link: link,
+          });
+      }
+    } else {
+      console.log(rowNum);
+      errors.push({ msg: `At Row Number(s) ${finalNums} value is missing` });
+      res.render("csv", { errors });
     }
   });
 });
