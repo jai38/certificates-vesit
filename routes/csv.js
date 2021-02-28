@@ -4,22 +4,9 @@ const multer = require("multer");
 const papaparse = require("papaparse");
 const fs = require("fs");
 const dotenv = require("dotenv").config();
-const firebase = require("firebase/app");
-require("firebase/firestore");
-
-// Initialize Firebase App only once
-if (!firebase.apps.length) {
-  firebase.initializeApp({
-    apiKey: process.env.DISCORD_APP_FIREBASE_API_KEY,
-    authDomain: process.env.DISCORD_APP_FIREBASE_AUTH_DOMAIN,
-    projectId: process.env.DISCORD_APP_FIREBASE_PROJECT_ID,
-  });
-} else {
-  firebase.app();
-}
-
+const admin = require("./../firebase-admin");
 // Handle for Cloud Firsestore
-const db = firebase.firestore();
+const db = admin.firestore();
 
 let certificates = []; // Initialize JSON array
 let fileName;
@@ -96,6 +83,7 @@ router.post("/", (req, res) => {
         });
     }*/
     if (flag) {
+      fs.writeFileSync("count.txt", `${rowNum}`);
       errors.push({
         msg: `You are supposed to upload ${rowNum} certificates below`,
       });
@@ -111,7 +99,7 @@ router.post("/", (req, res) => {
           .set({
             name: certificates[i].name,
             year: certificates[i].year,
-            link: link,
+            link: `https://firebasestorage.googleapis.com/v0/b/vesit-bot-web.appspot.com/o/${certificates[i].UID}.jpg?alt=media`,
           });
       }
     } else {
