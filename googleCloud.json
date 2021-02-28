@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "vesit-bot",
+  "private_key_id": "49353a94a219195031e114e07e087453dcc1a463",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCDXRZ7KyvXqE2I\nerOKfaCzJL+uFR6MDGmYwySsy6iuxyqz2CtGjfGB3PJnMyAu3R5s8p+AT7pqP/cp\nS04mdqYdlbek0J2az6aNP9ckjHrsmzIYD6VnNxtVEK8eblD7GVuQK7NkbB6E9wWk\nm6BvcRB9vJpVkZX7hKKeJN8mbzdGvcdcXVmHWPSAuUlc1tsfLxAaURWVGJHVdFSr\nFlPPBxFpdfOaSmMjqUQ6i6fEbno9HkmMK++qmwNAsoPtuLgPt06vrifMjEW90GvA\nz9PmQmGbfzZYz4eoSAKG0wM/04lTARt8vEyyIhoDRAr8MQsSCugkZwIMW4j0EcPc\nPC5jZyMBAgMBAAECggEAD9iPSS1EfR+ytpdih/6uf12b96JZjHhE1qYXivaIMwkY\naBhX5AtkSg9+eB9tLuoCbQ75WY+Eg6OSq3sHgtFGKYRxYiK+GDobM6ezSpfdjiQM\nb2WXxLMbi2/XR/rzrs54wpPa8G6wYcawehJB0J+ZZyl0joTgzDXMLfpxpp+80b4P\ni9yyf1LjBVCycoqnBM37a9u1j5PWl3/tfhYaa6JyXuHqlGpABB55RQYNF5NQBnLH\n0qpi22NFXB4hkN7KaxJ6TDPI2znUr8/acLHAFkeLQ3dQngFJHEecYfn1xLDfs13s\nO8c9AMq7CAdn9syIZmzknuNu41pMtIXsze0F9GNBSQKBgQC3cTXJlWscA/p1jSJD\niCEu1AhtloAkQ7hlp2DZ8CHVa1WzsZ4HocoH0yeoJIDeiQuP4I81TUWlI8KT8Xxt\njWs+SmC3999dpptb9DzYSNhrzx8cws0Pu4gV5/1P21MgiHIQDX84jtvy2tqqqdG3\nZ1RTMJiscj6OpsX3HLfwzzsSbQKBgQC3Uo9q5hSxim+o6bi4Dg9Yl9W/3gm+wesu\nFDiLSOdnX+VMaftwEw8ytJSFHhfx8h/U104/i4Xigze9XxJUhQVHswBt51Z/JoXd\nN1Ej3YsR4801zAbeZazQN9jmEPuD1suc6A8FiER9sRWFnqpqWib2wTC8ZBv41ZLe\naugYjWGWZQKBgHzJsJNO56wJMMnillpmMlyOtKUH6mfBAaF1OTdIWVu7RnOU8jGy\n56JnC+Uf3+KCS7E2S3Uw+Z2bM/Q8JC7KMxgOtLixD+u/OJRXE0T2WPMN1NZV1fVL\n1wk/5Vv7kRLifuVYqSCqXglYw8Ow/g7LZduphVJZ7SBRZv3xNVfFQSQJAoGBAK7T\nEihswMFLdw7LzTfhWKsxKUvvkLWVMxXffMj/voZsAj0sOPf5hR3i7lxAha9bKxYM\nOfgJs6V/Y5G5774gmRd2Umt9GZTqhPChB0U/ypdF+nZaWxaOOg7bo4JMIb/qAIVj\nHKg2+rIvRYoG9Re1X8EkHbkbcz2LV6O6qhp4Ad+tAoGAEI8FMu3cQXK9h/l0dANk\n7yalHS4kLirgvKKICCDmE25YK/CqGMPjIN+rFxXy60mFxODkppzSotnp1KSlWVCX\nKSm4oS8D1O5vHUB8rBo1qHrD+PT+P3pWZRH9nxZ7fYktRjVcrZrylyG0aBrpXoBl\n8Am6PcvVCffpQNHcIu4+gws=\n-----END PRIVATE KEY-----\n",
+  "client_email": "vesit-bot@vesit-bot.iam.gserviceaccount.com",
+  "client_id": "101295741071265512391",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/vesit-bot%40vesit-bot.iam.gserviceaccount.com"
+}
