@@ -1,5 +1,5 @@
 const admin = require("firebase-admin");
-const serviceKey = require("./certificatesKey.json");
+const serviceKey = JSON.parse(process.env.serviceKey);
 // Initialize Firebase App only once
 const firbaseConfig = {};
 admin.initializeApp({
