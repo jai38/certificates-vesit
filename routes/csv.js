@@ -99,7 +99,7 @@ router.post("/", (req, res) => {
           .set({
             name: certificates[i].name,
             year: certificates[i].year,
-            link: `https://firebasestorage.googleapis.com/v0/b/vesit-bot-web.appspot.com/o/${certificates[i].UID}.jpg?alt=media`,
+            link: `https://firebasestorage.googleapis.com/v0/b/certificates-vesit.appspot.com/o/${certificates[i].UID}.jpg?alt=media`,
           });
       }
     } else {

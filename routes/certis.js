@@ -32,7 +32,7 @@ router.post("/", (req, res) => {
             .upload(`./uploads/${file.filename}`)
             .then(() =>
               console.log(
-                `https://firebasestorage.googleapis.com/v0/b/vesit-bot-web.appspot.com/o/${file.filename}?alt=media`
+                `https://firebasestorage.googleapis.com/v0/b/certificates-vesit.appspot.com/o/${file.filename}?alt=media`
               )
             );
         }
