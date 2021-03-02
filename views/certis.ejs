@@ -28,32 +28,11 @@
         <%- include('messages') %>
         <div class="slideshow-container">
           <div class="mySlides">
-            <div class="numbertext">1 / 3</div>
-            <img src="/images/col_view.jpg" />
+            <img src="/images/certi.png" />
             <div class="text"></div>
           </div>
 
-          <div class="mySlides">
-            <div class="numbertext">2 / 3</div>
-            <img src="/images/Front_view.jpg" />
-            <div class="text"></div>
-          </div>
-
-          <div class="mySlides">
-            <div class="numbertext">3 / 3</div>
-            <img src="/images/Amphi.jpg" />
-            <div class="text"></div>
-          </div>
-        </div>
-        <br />
-
-        <div style="text-align: center">
-          <span class="dot"></span>
-          <span class="dot"></span>
-          <span class="dot"></span>
-        </div>
-
-        <br />
+          <br />
         <!-- <form action="/uploadCerits" method="POST" enctype="multipart/form-data">
         <label for="allFiles">Upload certificates: </label>
         <input type="file" name="allFiles" multiple="multiple" accept="image/*" />
@@ -102,65 +81,6 @@
       </div>
     </div>
 
-    <script>
-      document.getElementById("count").value = document.getElementById(
-        "countInP"
-      ).innerHTML;
-      console.log(document.getElementById("count"));
-      var slideIndex = 0;
-      showSlides();
-
-      function showSlides() {
-        var i;
-        var slides = document.getElementsByClassName("mySlides");
-        var dots = document.getElementsByClassName("dot");
-        for (i = 0; i < slides.length; i++) {
-          slides[i].style.display = "none";
-        }
-        slideIndex++;
-        if (slideIndex > slides.length) {
-          slideIndex = 1;
-        }
-        for (i = 0; i < dots.length; i++) {
-          dots[i].className = dots[i].className.replace(" active", "");
-        }
-        slides[slideIndex - 1].style.display = "block";
-        dots[slideIndex - 1].className += " active";
-        setTimeout(showSlides, 3000); // Change image every 2 seconds
-      }
-
-      Array.prototype.forEach.call(
-        document.querySelectorAll(".file-upload__button"),
-        function (button) {
-          const hiddenInput = button.parentElement.querySelector(
-            ".file-upload__input"
-          );
-          const label = button.parentElement.querySelector(
-            ".file-upload__label"
-          );
-          const defaultLabelText = "No file(s) selected";
-
-          // Set default text for label
-          label.textContent = defaultLabelText;
-          label.title = defaultLabelText;
-
-          button.addEventListener("click", function () {
-            hiddenInput.click();
-          });
-
-          hiddenInput.addEventListener("change", function () {
-            const filenameList = Array.prototype.map.call(
-              hiddenInput.files,
-              function (file) {
-                return file.name;
-              }
-            );
-
-            label.textContent = filenameList.join(", ") || defaultLabelText;
-            label.title = label.textContent;
-          });
-        }
-      );
-    </script>
+    
   </body>
 </html>
