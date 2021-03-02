@@ -78,7 +78,7 @@
     </div>
     <script>
 
-        document.querySelector('#uploadPage').addEventListener('load', function () {
+        document.querySelector('.uploadPage').addEventListener('load', function () {
             const uploadForm = document.getElementById('uploadForm');
             const myFiles = document.getElementById('myFiles');
             const progressBarFill = document.querySelector('#progressBar > .progress-bar-fill');
@@ -90,7 +90,7 @@
                 //  e.preventDefault();
 
                 const xhr = new XMLHttpRequest();
-                xhr.open('POST', '/certis');
+                xhr.open('POST', '/csv');
                 xhr.upload.addEventListener("progress", e => {
                     const percent = e.lengthComputable ? (e.loaded / e.total) * 100 : 0;
                     console.log(e.loaded);
