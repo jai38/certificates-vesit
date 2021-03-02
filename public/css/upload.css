@@ -1,7 +1,51 @@
 body {
   font-family: Verdana, sans-serif;
 }
-
+.alert {
+  position: absolute;
+  left: 5%;
+  bottom: 0vw;
+  width: 90%;
+  background-color: rgb(253, 2, 2);
+  font-size: 20px;
+  padding: 2vh;
+  color: #ffffff;
+}
+.closebtn {
+  font-size: 30px;
+  cursor: pointer;
+  position: absolute;
+  right: 2vh;
+  top: 0.6vh;
+}
+.alert.show::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 4px;
+  background-color: #f59d29;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 11;
+}
+.alert.show {
+  animation: showAlert 1s ease forwards;
+}
+@keyframes showAlert {
+  0% {
+    transform: translateX(100%);
+  }
+  40% {
+    transform: translateX(-15%);
+  }
+  80% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-10px);
+  }
+}
 .navbar {
   background-color: #ffbf47;
 }

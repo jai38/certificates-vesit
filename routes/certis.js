@@ -6,7 +6,7 @@ const admin = require("./../firebase-admin");
 
 const defaultStorage = admin.storage();
 const bucket = defaultStorage.bucket();
-const errors = [];
+let errors = [];
 router.get("/", (req, res) => {
   res.render("certis");
 });
@@ -17,6 +17,7 @@ router.post("/", (req, res) => {
     storage: storage,
   }).array("certis", parseInt(count));
   uploadCertis(req, res, (err) => {
+    errors = [];
     if (err) {
       errors.push({ msg: `You have entered more files than ${count}` });
       res.render("certis", { errors });

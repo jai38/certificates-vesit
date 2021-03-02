@@ -25,22 +25,22 @@
       </nav>
 
       <div class="container-fluid">
-        <%- include('messages') %>
         <div class="slideshow-container">
           <div class="mySlides">
             <img src="/images/certi.png" />
             <div class="text"></div>
           </div>
-
+          
           <br />
-        <!-- <form action="/uploadCerits" method="POST" enctype="multipart/form-data">
-        <label for="allFiles">Upload certificates: </label>
-        <input type="file" name="allFiles" multiple="multiple" accept="image/*" />
-        <br />
-        <br />
-        <input type="submit" value="submit" name="btn" />
-      </form> -->
-
+          <!-- <form action="/uploadCerits" method="POST" enctype="multipart/form-data">
+            <label for="allFiles">Upload certificates: </label>
+            <input type="file" name="allFiles" multiple="multiple" accept="image/*" />
+            <br />
+            <br />
+            <input type="submit" value="submit" name="btn" />
+          </form> -->
+          
+          <%- include('messages') %>
         <form
           action="/certis"
           enctype="multipart/form-data"

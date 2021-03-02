@@ -10,8 +10,8 @@ const db = admin.firestore();
 
 let certificates = []; // Initialize JSON array
 let fileName;
-let flag = true;
 let errors = [];
+let flag = true;
 let finalNums = [];
 let rowNum = 0;
 const uploadUID = async () => {
@@ -24,6 +24,7 @@ const uploadUID = async () => {
       sheets = sheet.data;
     },
   });
+  flag = true;
   sheets.pop();
   sheets.forEach(async (c) => {
     rowNum++;
