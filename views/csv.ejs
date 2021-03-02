@@ -76,5 +76,35 @@
         </div>
       </div>
     </div>
+    <script>
+
+        document.querySelector('.uploadPage').addEventListener('load', function () {
+            const uploadForm = document.getElementById('uploadForm');
+            const myFiles = document.getElementById('myFiles');
+            const progressBarFill = document.querySelector('#progressBar > .progress-bar-fill');
+            const progressBarText = document.querySelector('.progress-bar-text');
+
+            uploadForm.addEventListener('submit', uploadFile);
+
+            function uploadFile(e) {
+                //  e.preventDefault();
+
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '/csv');
+                xhr.upload.addEventListener("progress", e => {
+                    const percent = e.lengthComputable ? (e.loaded / e.total) * 100 : 0;
+                    console.log(e.loaded);
+                    console.log(e.total);
+                    console.log(e);
+
+                    progressBarFill.style.width = percent.toFixed(2) + '%';
+                    progressBarText.textContent = percent.toFixed(2) + '%';
+                });
+                xhr.setRequestHeader("Content-type", 'multipart/form-data');
+                xhr.send(new FormData());
+            }
+
+        });
+    </script>
   </body>
 </html>
