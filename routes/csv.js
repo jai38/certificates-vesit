@@ -101,7 +101,7 @@ router.post("/", (req, res) => {
       });
       res.render("certis", { errors, count: rowNum });
       for (i = 0; i < certificates.length - 1; i++) {
-        const link = [];
+        const link = `https://firebasestorage.googleapis.com/v0/b/vesit-bot-web.appspot.com/o/${certificates[i].UID}?alt=media`;
 
         // Send each row to firebase, under User/{emailID}/Certificates/{UID}
         const certi = await db
