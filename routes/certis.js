@@ -38,7 +38,9 @@ router.post("/", (req, res) => {
             );
         }
       });
-      res.send("Done!!!!");
+      errors = [];
+      errors.push({ msg: "All Files are uploaded sucessfully" });
+      res.render("main", { errors });
     }
   });
 });
