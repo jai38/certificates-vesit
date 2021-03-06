@@ -34,14 +34,6 @@
 
         <br />
 
-        <!-- <form action="/uploadCsv" method="POST" enctype="multipart/form-data">
-      <label for="csv">upload CSV: </label>
-      <input type="file" name="csv" accept=".csv" />
-      <br />
-      <br />
-      <input type="submit" value="submit" name="btn" />
-    </form> -->
-
         <form
           action="/csv"
           method="POST"
@@ -63,94 +55,13 @@
               type="submit"
               class="selectFiles btn-lg"
               value="Upload your files"
-              onclick="uploadFile()"
             />
           </div>
-          <progress id="progressBar" value="0" max="100" style="width:300px; height:20px;"></progress>
-          <h3 id="status"></h3>
-          <p id="loaded_n_total"></p>
+         
         </form>
+       <br><br>
 
-        <div class="pbar">
-          <div class="progress-bar" id="progressBar">
-            <div class="progress-bar-fill">
-              <span class="progress-bar-text"> 0% </span>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
-    
-    <!-- <script type="text/javascript">
-      function _(el) {
-      return document.getElementById(el);
-    }
-    
-    function uploadFile() {
-      var file = _("myFile");
-      //alert(file.name+" | "+file.size+" | "+file.type);
-      var formdata = new FormData();
-      formdata.append("myFile", file);
-      var ajax = new XMLHttpRequest();
-      ajax.upload.addEventListener("progress", progressHandler, false);
-      ajax.addEventListener("load", completeHandler, false);
-      ajax.addEventListener("error", errorHandler, false);
-      ajax.addEventListener("abort", abortHandler, false);
-      ajax.open("POST", "/csv"); // http://www.developphp.com/video/JavaScript/File-Upload-Progress-Bar-Meter-Tutorial-Ajax-PHP
-      //use file_upload_parser.php from above url
-      ajax.send(formdata);
-    }
-    
-    function progressHandler(event) {
-      _("loaded_n_total").innerHTML = "Uploaded " + event.loaded + " bytes of " + event.total;
-      var percent = (event.loaded / event.total) * 100;
-      _("progressBar").value = Math.round(percent);
-      _("status").innerHTML = Math.round(percent) + "% uploaded... please wait";
-    }
-    
-    function completeHandler(event) {
-      _("status").innerHTML = event.target.responseText;
-      _("progressBar").value = 0; //wil clear progress bar after successful upload
-    }
-    
-    function errorHandler(event) {
-      _("status").innerHTML = "Upload Failed";
-    }
-    
-    function abortHandler(event) {
-      _("status").innerHTML = "Upload Aborted";
-    }
-    </script>
-    
-    <script>
-
-        document.querySelector('.uploadPage').addEventListener('load', function () {
-            const uploadForm = document.getElementById('uploadForm');
-            const myFiles = document.getElementById('myFiles');
-            const progressBarFill = document.querySelector('#progressBar > .progress-bar-fill');
-            const progressBarText = document.querySelector('.progress-bar-text');
-
-            uploadForm.addEventListener('submit', uploadFile);
-
-            function uploadFile(e) {
-                //  e.preventDefault();
-
-                const xhr = new XMLHttpRequest();
-                xhr.open('POST', '/csv');
-                xhr.upload.addEventListener("progress", e => {
-                    const percent = e.lengthComputable ? (e.loaded / e.total) * 100 : 0;
-                    console.log(e.loaded);
-                    console.log(e.total);
-                    console.log(e);
-
-                    progressBarFill.style.width = percent.toFixed(2) + '%';
-                    progressBarText.textContent = percent.toFixed(2) + '%';
-                });
-                xhr.setRequestHeader("Content-type", 'multipart/form-data');
-                xhr.send(new FormData());
-            }
-
-        });
-    </script> -->
   </body>
 </html>
