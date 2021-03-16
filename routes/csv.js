@@ -36,15 +36,16 @@ const uploadUID = async () => {
       // councilEmail,
       year: 2020,
     };
-    if (!(c[5] && c[0] && c[3])) {
+    if (!(c[5] && c[0] && c[3] && c[6])) {
       flag = false;
       finalNums.push(rowNum + 1);
-    } else if (c[5] == "" || c[0] == "" || c[3] == "") {
+    } else if (c[5] == "" || c[0] == "" || c[3] == "" || c[6] == "") {
       flag = false;
       finalNums.push(rowNum + 1);
     }
     certificates.push(currentCerti);
   });
+  console.log(certificates);
   if (flag) return certificates;
   return -1;
 };
@@ -108,7 +109,9 @@ router.post("/", (req, res) => {
       }
     } else {
       console.log(rowNum);
-      errors.push({ msg: `At Row Number(s) ${finalNums} value is missing` });
+      errors.push({
+        msg: `At Row Number(s) ${finalNums} some of the values are missing`,
+      });
       res.render("csv", { errors });
     }
   });

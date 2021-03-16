@@ -2,6 +2,7 @@ body {
   font-family: Verdana, sans-serif;
 }
 .alert {
+  z-index: 1;
   position: absolute;
   left: 5%;
   bottom: 0vw;
@@ -12,6 +13,7 @@ body {
   color: #ffffff;
 }
 .closebtn {
+  z-index: 1;
   font-size: 30px;
   cursor: pointer;
   position: absolute;
@@ -19,6 +21,7 @@ body {
   top: 0.6vh;
 }
 .alert.show::before {
+  z-index: 1;
   content: "";
   position: absolute;
   left: 0;
@@ -30,6 +33,7 @@ body {
   z-index: 11;
 }
 .alert.show {
+  z-index: 1;
   animation: showAlert 1s ease forwards;
 }
 @keyframes showAlert {
