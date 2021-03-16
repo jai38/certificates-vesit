@@ -24,6 +24,7 @@ router.post("/", (req, res) => {
     }
     let files = req.files;
     if (files.length < count) {
+      errors = [];
       errors.push({ msg: `You have entered less files than ${count}` });
       res.render("certis", { errors });
     } else if (!err) {

@@ -87,6 +87,7 @@ router.post("/", (req, res) => {
         });
     }*/
     if (flag) {
+      errors = [];
       fs.writeFileSync("count.txt", `${rowNum}`);
       errors.push({
         msg: `You are supposed to upload ${rowNum} certificates below`,
@@ -109,6 +110,7 @@ router.post("/", (req, res) => {
       }
     } else {
       console.log(rowNum);
+      errors = [];
       errors.push({
         msg: `At Row Number(s) ${finalNums} some of the values are missing`,
       });
