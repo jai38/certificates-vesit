@@ -32,6 +32,8 @@ const uploadUID = async () => {
       email: c[5],
       UID: c[0],
       name: c[3],
+      description: c[6],
+      // councilEmail,
       year: 2020,
     };
     if (!(c[5] && c[0] && c[3])) {
@@ -100,6 +102,7 @@ router.post("/", (req, res) => {
           .set({
             name: certificates[i].name,
             year: certificates[i].year,
+            description: certificates[i].description,
             link: `https://firebasestorage.googleapis.com/v0/b/certificates-vesit.appspot.com/o/${certificates[i].UID}.jpg?alt=media`,
           });
       }
