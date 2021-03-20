@@ -1,3 +1,4 @@
 {
-    "editor.showDeprecated": false
+    "editor.showDeprecated": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

@@ -197,6 +197,9 @@ form {
   white-space: nowrap;
   font-family: "Quicksand", sans-serif;
 }
+.contact-box {
+  border: solid;
+}
 
 /* On smaller screens, decrease text size */
 @media only screen and (max-width: 300px) {
