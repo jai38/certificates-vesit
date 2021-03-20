@@ -246,3 +246,23 @@ form {
     font-family: "Quicksand", sans-serif;
   }
 }
+
+/* contact us */
+.contact {
+  background-color: #ffbf47 !important;
+  color: #000;
+  font-family: "Quicksand", sans-serif;
+  margin-top: 2rem;
+}
+.contact-text-main {
+  padding-top: 10px;
+  font-size: 1.7rem;
+  text-decoration-style: solid;
+  font-weight: bold;
+}
+.contact-text {
+  margin-left: 14%;
+  margin-right: 14%;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
