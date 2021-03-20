@@ -198,6 +198,7 @@ form {
   font-family: "Quicksand", sans-serif;
 }
 .contact-box {
+  z-index: 1;
   border: solid;
 }
 
@@ -249,6 +250,7 @@ form {
 
 /* contact us */
 .contact {
+  z-index: 1;
   background-color: #ffbf47 !important;
   color: #000;
   font-family: "Quicksand", sans-serif;

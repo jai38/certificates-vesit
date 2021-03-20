@@ -7,7 +7,7 @@ const dotenv = require("dotenv").config();
 const admin = require("./../firebase-admin");
 // Handle for Cloud Firsestore
 const db = admin.firestore();
-
+let sheets = [];
 let certificates = []; // Initialize JSON array
 let fileName;
 let errors = [];
@@ -20,11 +20,28 @@ const uploadUID = async () => {
   const csv = fs.readFileSync(`./uploads/${fileName}`, "utf-8");
   papaparse.parse(csv, {
     complete: (sheet) => {
-      sheets = sheet.data.shift();
       sheets = sheet.data;
     },
   });
+  let [a, b, c, d, e, f, g] = sheets.shift();
   flag = true;
+  if (
+    a != "UID" ||
+    b != "Class" ||
+    c != "Names" ||
+    d != "Certificate_Name" ||
+    e != "File_Name" ||
+    f != "Email" ||
+    g != "Certificate_description"
+  ) {
+    flag = false;
+    errors = [];
+    errors.push({
+      msg:
+        "Please enter Correct Column names as mention in the expected format",
+    });
+    return -1;
+  }
   sheets.pop();
   sheets.forEach(async (c) => {
     rowNum++;
@@ -47,6 +64,12 @@ const uploadUID = async () => {
   });
   console.log(certificates);
   if (flag) return certificates;
+  else {
+    errors = [];
+    errors.push({
+      msg: `At Row Number(s) ${finalNums} some of the values are missing`,
+    });
+  }
   return -1;
 };
 
@@ -89,6 +112,7 @@ router.post("/", (req, res) => {
     if (flag) {
       errors = [];
       fs.writeFileSync("count.txt", `${rowNum}`);
+      errors = [];
       errors.push({
         msg: `You are supposed to upload ${rowNum} certificates below`,
       });
@@ -109,11 +133,6 @@ router.post("/", (req, res) => {
           });
       }
     } else {
-      console.log(rowNum);
-      errors = [];
-      errors.push({
-        msg: `At Row Number(s) ${finalNums} some of the values are missing`,
-      });
       res.render("csv", { errors });
     }
   });
