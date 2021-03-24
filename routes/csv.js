@@ -24,15 +24,24 @@ const uploadUID = async () => {
     },
   });
   let [a, b, c, d, e, f, g] = sheets.shift();
+  [a, b, c, d, e, f, g] = [
+    a.toLowerCase(),
+    b.toLowerCase(),
+    c.toLowerCase(),
+    d.toLowerCase(),
+    e.toLowerCase(),
+    f.toLowerCase(),
+    g.toLowerCase(),
+  ];
   flag = true;
   if (
-    a != "UID" ||
-    b != "Class" ||
-    c != "Names" ||
-    d != "Certificate_Name" ||
-    e != "File_Name" ||
-    f != "Email" ||
-    g != "Certificate_description"
+    a != "uid" ||
+    b != "class" ||
+    c != "names" ||
+    d != "certificate_name" ||
+    e != "file_name" ||
+    f != "email" ||
+    g != "certificate_description"
   ) {
     flag = false;
     errors = [];
