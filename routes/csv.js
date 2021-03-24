@@ -51,7 +51,6 @@ const uploadUID = async () => {
       name: c[3],
       description: c[6],
       // councilEmail,
-      year: 2020,
     };
     if (!(c[5] && c[0] && c[3] && c[6])) {
       flag = false;
@@ -121,13 +120,23 @@ router.post("/", (req, res) => {
         const link = `https://firebasestorage.googleapis.com/v0/b/vesit-bot-web.appspot.com/o/${certificates[i].UID}?alt=media`;
 
         // Send each row to firebase, under User/{emailID}/Certificates/{UID}
+        const month = parseInt(certificates[i].UID.slice(-9,-7));
+        let calcYear = `20`
+        if (month > 6) {
+          calcYear += certificates[i].UID.slice(-7,-5)
+        }
+        else {
+          const temp = parseInt(certificates[i].UID.slice(-7,-5)) - 1
+          calcYear += temp.toString()
+        }
+        
         const certi = await db
           .doc(
             `Users/${certificates[i].email}/Certificates/${certificates[i].UID}`
           )
           .set({
             name: certificates[i].name,
-            year: certificates[i].year,
+            year: calcYear,
             description: certificates[i].description,
             link: `https://firebasestorage.googleapis.com/v0/b/certificates-vesit.appspot.com/o/${certificates[i].UID}.jpg?alt=media`,
           });
