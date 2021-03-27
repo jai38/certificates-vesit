@@ -1,12 +1,96 @@
 const router = require("express").Router();
 const dotenv = require("dotenv").config();
 const users = JSON.parse(process.env.users);
+const firebase = require("firebase/app");
+require("firebase/auth");
+
+if (!firebase.apps.length) {
+  const firebaseConfig = {
+    apiKey: process.env.apiKey,
+    authDomain: process.env.authDomain,
+    projectId: process.env.projectId,
+    storageBucket: process.env.storageBucket,
+    messagingSenderId: process.env.messagingSenderId,
+    appId: process.env.appId,
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+} else {
+  firebase.app()
+}
+
 router.get("/", (req, res) => {
   res.render("main");
 });
+
+router.post('/oauth', (req, res) => {
+  const id = JSON.stringify(req.body);
+  // console.log(id);
+
+  // Build Firebase credential with the Google ID token.
+  var credential = firebase.auth.GoogleAuthProvider.credential(id);
+
+  // Sign in with credential from the Google user.
+  firebase.auth().signInWithCredential(credential).then(user => {
+    console.log("Success");
+    // res.render("csv")
+  }).catch((error) => {
+    console.log(error.message);
+  });
+});
+
 router.post("/", (req, res) => {
   const { email, password } = req.body;
   const errors = [];
+  // firebase.auth().signInWithRedirect(provider);
+  // firebase.auth().signInWithPopup(provider).then(user=> console.log(user));
+
+  // auth.signInWithEmailAndPassword(email, password).then(user => {
+  //   console.log(user)
+  //   res.render("csv")
+  // }).catch(error => {
+  //   console.log(error)
+  // })
+
+  // res.render("csv");
+
+  // var id_token = googleUser.getAuthResponse().id_token
+
+  // // Build Firebase credential with the Google ID token.
+  // var credential = firebase.auth.GoogleAuthProvider.credential(id_token);
+
+  // // Sign in with credential from the Google user.
+  // firebase.auth().signInWithCredential(credential)
+  // .then((obj)=> res.render("csv"))
+  // .catch((error) => {
+  //   // Handle Errors here.
+  //   var errorCode = error.code;
+  //   var errorMessage = error.message;
+  //   // The email of the user's account used.
+  //   var email = error.email;
+  //   // The firebase.auth.AuthCredential type that was used.
+  //   var credential = error.credential;
+  //   // ...
+  // });
+  
+  // firebase.auth()
+  //   .signInWithPopup(provider)
+  //   .then((result) => {
+  //     /** @type {firebase.auth.OAuthCredential} */
+  //     var credential = result.credential;
+
+  //     // This gives you a Google Access Token. You can use it to access the Google API.
+  //     var token = credential.accessToken;
+  //     // The signed-in user info.
+  //     var user = result.user;
+  //     console.log(user)
+  //   }).catch((error) => {
+  //     // Handle Errors here.
+  //     console.log(error.message)
+  //   });
+  
+  // console.log(provider);
+
   try {
     const name = email.split(".");
     let user = name[0];
@@ -17,7 +101,7 @@ router.post("/", (req, res) => {
       errors.push({ msg: "Invalid password" });
       res.render("main", { errors });
     } else {
-      errrs.push({ msg: "Please enter vesit council email" });
+      erros.push({ msg: "Please enter vesit council email" });
       res.render("main", { errors });
     }
   } catch (e) {

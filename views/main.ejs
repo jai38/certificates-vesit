@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="92910074640-vc6ffegjshje9e9ogbfbfr5s0k85r6qj.apps.googleusercontent.com">
+    <meta name="google-signin-cookiepolicy" content="single_host_origin">
+    <meta name="google-signin-scope" content="profile email">
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -11,7 +15,7 @@
       crossorigin="anonymous"
     />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="./../clientJS/certis.js"></script>
+    <!-- <script src="./../clientJS/main.js"></script> -->
     <link rel="stylesheet" href="/css/main.css" type="text/css" />
     <title>Document</title>
   </head>
@@ -28,9 +32,10 @@
         <div class="container-fluid">
           <br /><br />
           <h1>Log In</h1>
-          <h4>Use your VES Account to Log In</h4>
+          <h4>Sign In with your VES Account</h4>
           <br /><br />
-          <form action="/" method="POST" class="form">
+          <!-- <form action="/" method="POST" class="form"> -->
+          <form class="form">
             <div class="form-group">
               <input
                 style="width: 62.5%; margin-left: 20%"
@@ -55,12 +60,97 @@
               />
             </div>
 
-            <button class="but btn btn-warning btn-lg" type="submit">
-              Log In
-            </button>
+            <!-- <button class="but btn btn-warning btn-lg" type="submit">
+              Click Here!
+            </button> -->
+            <div class="btn g-signin2" data-theme="dark" data-onsuccess="onSignIn" type="submit">Click Here!</div>
           </form>
         </div>
       </div>
     </div>
+<!-- 
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script> -->
+<!-- 
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyANNME-1n2uR-lUVDm6ipYAS9oVO9I41-A",
+    authDomain: "certificates-vesit.firebaseapp.com",
+    projectId: "certificates-vesit",
+    storageBucket: "certificates-vesit.appspot.com",
+    messagingSenderId: "92910074640",
+    appId: "1:92910074640:web:6008580b8dacaa97f60395",
+    measurementId: "G-Z1KNP3BZ17"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script> -->
+    
+    <script>
+
+//       function isUserEqual(googleUser, firebaseUser) {
+//   if (firebaseUser) {
+//     var providerData = firebaseUser.providerData;
+//     for (var i = 0; i < providerData.length; i++) {
+//       if (providerData[i].providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
+//           providerData[i].uid === googleUser.getBasicProfile().getId()) {
+//         // We don't need to reauth the Firebase connection.
+//         return true;
+//       }
+//     }
+//   }
+//   return false;
+// }
+
+//       function onSignIn(googleUser) {
+//   console.log('Google Auth Response', googleUser);
+//   // We need to register an Observer on Firebase Auth to make sure auth is initialized.
+//   var unsubscribe = firebase.auth().onAuthStateChanged((firebaseUser) => {
+//     unsubscribe();
+//     // Check if we are already signed-in Firebase with the correct user.
+//     if (!isUserEqual(googleUser, firebaseUser)) {
+//       // Build Firebase credential with the Google ID token.
+//       var credential = firebase.auth.GoogleAuthProvider.credential(
+//           googleUser.getAuthResponse().id_token);
+
+//       // Sign in with credential from the Google user.
+//       firebase.auth().signInWithCredential(credential)
+//       .catch((error) => {
+//         console.log(error.message);
+//       });
+//     } else {
+//       console.log('User already signed-in Firebase.');
+//     }
+//   });
+// }
+
+      function onSignIn(googleUser) {
+        var id_token = googleUser.getAuthResponse().id_token;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/oauth');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send(id_token);
+      }
+
+      // const todo = {
+      //     title: 'Some really important work to finish'
+      // };
+      // signIn = () => {
+      //   fetch('/oauth-login', {
+      //     method: 'POST',
+      //     headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+      //     body: JSON.stringify(todo),
+      //   })
+      //   .then(obj => console.log("Success"))
+      //   .catch(error => console.log(error))
+      // }
+    </script>
   </body>
 </html>
