@@ -31,6 +31,7 @@ router.post("/signIn", (req, res) => {
     const name = email.split(".");
     let user = name[0];
     user = users[user];
+    // firebase.auth().sendPasswordResetEmail(email);
     if (user.email == email) {
       firebase.auth().signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
@@ -59,12 +60,30 @@ router.post("/signOut", (req, res) => {
 });
 
 router.post("/resetPass", (req, res) => {
-  firebase.auth().sendPasswordResetEmail(email)
-  .then(() => {
-    console.log("Success");
-  }).catch((error) => {
-    console.log(error.message);
-  });
+  const { email } = req.body;
+  const errors = [];
+  
+  try {
+    const name = email.split(".");
+    let user = name[0];
+    user = users[user];
+    if (user.email == email) {
+      firebase.auth().sendPasswordResetEmail(email)
+      .then((userCredential) => {
+        console.log("Successfully Sent Email!");
+        errors.push({ msg: "Email Successfully Sent!" });
+        res.render("main", { errors });
+      })
+      .catch((error) => {
+        // console.log(error.message);
+        errors.push({ msg: "Invalid VES email or password" });
+        res.render("main", { errors });
+      });
+    }
+  } catch (e) {
+    errors.push({ msg: "Kindly use a valid VES email" });
+    res.render("main", { errors });
+  }
 });
 
 // router.post('/oauth', (req, res) => {

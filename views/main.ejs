@@ -32,9 +32,10 @@
         <div class="container-fluid">
           <br /><br />
           <h1>Log In</h1>
-          <h4>Sign In with your VES Account</h4>
+          <h4 id="signInHeader">Sign In with your VES Account</h4>
+          <h4 id="resetHeader" style="display: none;">You will be receiving a link<br>to reset the password!</h4>
           <br /><br />
-          <form action="/signIn" method="POST" class="form">
+          <form action="/signIn" method="POST" class="form mb-2" id="signInForm">
           <!-- <form class="form"> -->
             <div class="form-group">
               <input
@@ -60,18 +61,47 @@
               />
             </div>
 
-            <button class="btn btn-warning btn-lg" type="submit">
-              Click Here!
+            <button class="btn btn-warning btn-lg ml-3 mr-3 mt-2" type="submit">
+              Log In!
             </button>
-
+            <button class="btn btn-warning btn-lg mt-2" onclick="resetFormShow()">
+              Forgot Password?
+            </button>
             <!-- <div class="btn g-signin2" data-theme="dark" data-onsuccess="onSignIn" type="submit">Click Here!</div> -->
           </form>
-          <!-- <button class="btn btn-warning btn-lg">
-            Forgot Password?
-          </button> -->
+          <form action="/resetPass" method="POST" class="form mb-2" id="resetForm" style="display: none;">
+          <!-- <form class="form"> -->
+            <div class="form-group">
+              <input
+                style="width: 62.5%; margin-left: 20%"
+                class="form-control"
+                type="email"
+                name="email"
+                id="username"
+                placeholder="society.vesit@ves.ac.in"
+                value=".vesit@ves.ac.in"
+                required="required"
+              />
+            </div>
+
+            <button class="btn btn-warning btn-lg ml-3 mr-3 mt-2" type="submit">
+              Send Link!
+            </button>
+          </form>
         </div>
       </div>
     </div>
+
+    <script>
+      resetFormShow = () => {
+        console.log("Button Clicked!")
+        document.getElementById("signInForm").style.display = "none";
+        document.getElementById("signInHeader").style.display = "none";
+        document.getElementById("resetForm").style.display = "block";
+        document.getElementById("resetHeader").style.display = "block";
+      }
+    </script>
+
 <!-- 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>

@@ -65,32 +65,42 @@
         </div>
       </div>
     </div>
-      <div class="contact">
-        <div class="d-flex justify-content-center contact-text-main"> CONTACT US</div>
-        <hr style="background-color: crimson" />
-        <div class="d-flex justify-content-between ">
-          <div class="contact-text">
+    <footer class="contact">
+      <h2 class="d-flex justify-content-center contact-text-main"> Have a Query? Contact Us</h2>
+      <hr style="background-color: crimson" />
+      <div class="container">
+        <div class="row">
+          <div class="contact-text col-md-4">
             <p>Varad Rane</p>
             <i class="fa fa-envelope" aria-hidden="true" > 2018.varad.rane@ves.ac.in </i>
-            <i class="fa fa-phone" aria-hidden="true" style="padding-top: 20px;"> 8082642593 </i>
+            <br>
+            <i class="fa fa-phone" aria-hidden="true"> 8082642593 </i>
           </div>
-          <div class="contact-text">
+          <div class="contact-text col-md-4">
             <p>Jai Malani</p>
             <i class="fa fa-envelope" aria-hidden="true"> 2019jai.malani@ves.ac.in </i>
-            <i class="fa fa-phone" aria-hidden="true" style="padding-top: 20px; padding-bottom:20px;"> 7776939967 </i>
+            <br>
+            <i class="fa fa-phone" aria-hidden="true"> 7776939967 </i>
+          </div>
+          <div class="contact-text col-md-4">
+            <p>Mcvean Soans</p>
+            <i class="fa fa-envelope" aria-hidden="true"> 2019mcvean.soans@ves.ac.in </i>
+            <br>
+            <i class="fa fa-phone" aria-hidden="true"> 9819236390 </i>
           </div>
         </div>
       </div>
-      <script>
-        signOut = () => {
-          fetch('/signOut', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'text/plain;charset=UTF-8'
-            },
-            body: "Sign Out Request" // body data type must match "Content-Type" header
-          });
-        }
-      </script>
+    </footer>
+    <script>
+      signOut = () => {
+        fetch('/signOut', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain;charset=UTF-8'
+          },
+          body: "Sign Out Request" // body data type must match "Content-Type" header
+        });
+      }
+    </script>
   </body>
 </html>
