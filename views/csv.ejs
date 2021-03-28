@@ -22,7 +22,7 @@
       <nav class="navbar justify-content-between">
         <img src="/images/logo.png" alt="" width="60px" height="65px" />
         <!-- <form class="form-inline"> -->
-        <a class="btn btn-danger btn-lg" href="/"> LOGOUT </a>
+        <a class="btn btn-danger btn-lg" onclick="signOut()" href="/"> LOGOUT </a>
         <!-- </form> -->
       </nav>
 
@@ -65,7 +65,7 @@
         </div>
       </div>
     </div>
-       <div class="contact">
+      <div class="contact">
         <div class="d-flex justify-content-center contact-text-main"> CONTACT US</div>
         <hr style="background-color: crimson" />
         <div class="d-flex justify-content-between ">
@@ -81,5 +81,16 @@
           </div>
         </div>
       </div>
+      <script>
+        signOut = () => {
+          fetch('/signOut', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'text/plain;charset=UTF-8'
+            },
+            body: "Sign Out Request" // body data type must match "Content-Type" header
+          });
+        }
+      </script>
   </body>
 </html>

@@ -34,8 +34,8 @@
           <h1>Log In</h1>
           <h4>Sign In with your VES Account</h4>
           <br /><br />
-          <!-- <form action="/" method="POST" class="form"> -->
-          <form class="form">
+          <form action="/signIn" method="POST" class="form">
+          <!-- <form class="form"> -->
             <div class="form-group">
               <input
                 style="width: 62.5%; margin-left: 20%"
@@ -60,11 +60,15 @@
               />
             </div>
 
-            <!-- <button class="but btn btn-warning btn-lg" type="submit">
+            <button class="btn btn-warning btn-lg" type="submit">
               Click Here!
-            </button> -->
-            <div class="btn g-signin2" data-theme="dark" data-onsuccess="onSignIn" type="submit">Click Here!</div>
+            </button>
+
+            <!-- <div class="btn g-signin2" data-theme="dark" data-onsuccess="onSignIn" type="submit">Click Here!</div> -->
           </form>
+          <!-- <button class="btn btn-warning btn-lg">
+            Forgot Password?
+          </button> -->
         </div>
       </div>
     </div>
@@ -131,13 +135,13 @@
 //   });
 // }
 
-      function onSignIn(googleUser) {
-        var id_token = googleUser.getAuthResponse().id_token;
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/oauth');
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.send(id_token);
-      }
+      // function onSignIn(googleUser) {
+      //   var id_token = googleUser.getAuthResponse().id_token;
+      //   var xhr = new XMLHttpRequest();
+      //   xhr.open('POST', '/oauth');
+      //   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      //   xhr.send(id_token);
+      // }
 
       // const todo = {
       //     title: 'Some really important work to finish'

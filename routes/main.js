@@ -23,30 +23,73 @@ router.get("/", (req, res) => {
   res.render("main");
 });
 
-router.post('/oauth', (req, res) => {
-  const id = JSON.stringify(req.body);
-  // console.log(id);
+router.post("/signIn", (req, res) => {
+  const { email, password } = req.body;
+  const errors = [];
+  
+  try {
+    const name = email.split(".");
+    let user = name[0];
+    user = users[user];
+    if (user.email == email) {
+      firebase.auth().signInWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        console.log("Successful Sign In");
+        res.render("csv");
+      })
+      .catch((error) => {
+        // console.log(error.message);
+        errors.push({ msg: "Invalid VES email or password" });
+        res.render("main", { errors });
+      });
+    }
+  } catch (e) {
+    errors.push({ msg: "Kindly use a valid VES email" });
+    res.render("main", { errors });
+  }
+});
 
-  // Build Firebase credential with the Google ID token.
-  var credential = firebase.auth.GoogleAuthProvider.credential(id);
-
-  // Sign in with credential from the Google user.
-  firebase.auth().signInWithCredential(credential).then(user => {
-    console.log("Success");
-    // res.render("csv")
+router.post("/signOut", (req, res) => {
+  firebase.auth().signOut()
+  .then(() => {
+    console.log("Successful Sign Out");
   }).catch((error) => {
     console.log(error.message);
   });
 });
 
-router.post("/", (req, res) => {
-  const { email, password } = req.body;
-  const errors = [];
+router.post("/resetPass", (req, res) => {
+  firebase.auth().sendPasswordResetEmail(email)
+  .then(() => {
+    console.log("Success");
+  }).catch((error) => {
+    console.log(error.message);
+  });
+});
+
+// router.post('/oauth', (req, res) => {
+//   const id = JSON.stringify(req.body);
+//   // console.log(id);
+
+//   // Build Firebase credential with the Google ID token.
+//   var credential = firebase.auth.GoogleAuthProvider.credential(id);
+
+//   // Sign in with credential from the Google user.
+//   firebase.auth().signInWithCredential(credential).then(user => {
+//     console.log("Success");
+//     // res.render("csv")
+//   }).catch((error) => {
+//     console.log(error.message);
+//   });
+// });
+
+// router.post("/", (req, res) => {
+  
   // firebase.auth().signInWithRedirect(provider);
   // firebase.auth().signInWithPopup(provider).then(user=> console.log(user));
-
+  
   // auth.signInWithEmailAndPassword(email, password).then(user => {
-  //   console.log(user)
+    //   console.log(user)
   //   res.render("csv")
   // }).catch(error => {
   //   console.log(error)
@@ -90,23 +133,5 @@ router.post("/", (req, res) => {
   //   });
   
   // console.log(provider);
-
-  try {
-    const name = email.split(".");
-    let user = name[0];
-    user = users[user];
-    if (user.email == email && user.password == password) {
-      res.render("csv");
-    } else if (user.email == email) {
-      errors.push({ msg: "Invalid password" });
-      res.render("main", { errors });
-    } else {
-      erros.push({ msg: "Please enter vesit council email" });
-      res.render("main", { errors });
-    }
-  } catch (e) {
-    errors.push({ msg: "Please enter vesit council email" });
-    res.render("main", { errors });
-  }
-});
+// });
 module.exports = router;
