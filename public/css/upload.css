@@ -1,6 +1,7 @@
 body {
   font-family: Verdana, sans-serif;
 }
+
 .alert {
   z-index: 1;
   position: absolute;
@@ -12,6 +13,7 @@ body {
   padding: 2vh;
   color: #ffffff;
 }
+
 .closebtn {
   z-index: 1;
   font-size: 30px;
@@ -20,6 +22,7 @@ body {
   right: 2vh;
   top: 0.6vh;
 }
+
 .alert.show::before {
   z-index: 1;
   content: "";
@@ -32,24 +35,30 @@ body {
   box-sizing: border-box;
   z-index: 11;
 }
+
 .alert.show {
   z-index: 1;
   animation: showAlert 1s ease forwards;
 }
+
 @keyframes showAlert {
   0% {
     transform: translateX(100%);
   }
+
   40% {
     transform: translateX(-15%);
   }
+
   80% {
     transform: translateX(0%);
   }
+
   100% {
     transform: translateX(-10px);
   }
 }
+
 .navbar {
   background-color: #ffbf47;
 }
@@ -71,33 +80,6 @@ form {
   font-weight: bold;
 }
 
-/* progress bar */
-.pbar {
-  padding-left: 22.4%;
-  padding-bottom: 4%;
-  padding-top: 2.5%;
-}
-
-.progress-bar {
-  height: 35px;
-  width: 71.5%;
-  border: 2px solid #000;
-  background-color: #ffcf75;
-}
-
-.progress-bar-fill {
-  height: 100%;
-  width: 0%;
-  display: flex;
-  background-color: yellow;
-  font-weight: bold;
-  transition: width 0.25s;
-}
-.progress-bar-text {
-  margin-left: 10px;
-  font-weight: bold;
-}
-
 /* Slideshow container */
 .slideshow-container {
   max-width: 95%;
@@ -108,9 +90,19 @@ form {
 }
 
 .mySlides img {
-  width: 75%;
-  padding-left: 25%;
-  max-height: 100%;
+  justify-content: center;
+  width: 70%;
+  height: 480px;
+  margin-left: 15%;
+  border: 5px solid #000;
+}
+
+.mySlides1 img {
+  justify-content: center;
+  width: 70%;
+  height: 300px;
+  margin-left: 15%;
+  border: 5px solid #000;
 }
 
 /* Caption text */
@@ -197,6 +189,7 @@ form {
   white-space: nowrap;
   font-family: "Quicksand", sans-serif;
 }
+
 .contact-box {
   z-index: 1;
   border: solid;
@@ -255,20 +248,36 @@ form {
   font-family: "Quicksand", sans-serif;
   margin-top: 2rem;
 }
+
 .contact-text-main {
   padding-top: 10px;
   font-size: 1.7rem;
   text-decoration-style: solid;
   font-weight: bold;
 }
+
 .contact-text {
+  float: right;
   font-size: 1.3rem;
   font-weight: 500;
 }
-
+.contact-text p{
+  margin-bottom: 0;
+  margin-top: 5px;
+  margin-left: 25px;
+}
+.row{
+  margin-left: 750px;
+  margin-top: -300px;
+}
+.left{
+  width: 40%;
+}
 footer {
   clear: both;
-    position: relative;
-    height: 200px;
-    margin-top: -200px;
+  position: relative;
+  height: 380px;
+  /* margin-top: -200px; */
 }
+
+
