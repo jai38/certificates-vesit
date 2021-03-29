@@ -5,9 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="92910074640-vc6ffegjshje9e9ogbfbfr5s0k85r6qj.apps.googleusercontent.com">
-    <meta name="google-signin-cookiepolicy" content="single_host_origin">
-    <meta name="google-signin-scope" content="profile email">
+    <meta
+      name="google-signin-client_id"
+      content="92910074640-vc6ffegjshje9e9ogbfbfr5s0k85r6qj.apps.googleusercontent.com"
+    />
+    <meta name="google-signin-cookiepolicy" content="single_host_origin" />
+    <meta name="google-signin-scope" content="profile email" />
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -33,10 +36,17 @@
           <br /><br />
           <h1>Log In</h1>
           <h4 id="signInHeader">Sign In with your VES Account</h4>
-          <h4 id="resetHeader" style="display: none;">You will be receiving a link<br>to reset the password!</h4>
+          <h4 id="resetHeader" style="display: none">
+            You will be receiving a link<br />to reset the password!
+          </h4>
           <br /><br />
-          <form action="/signIn" method="POST" class="form mb-2" id="signInForm">
-          <!-- <form class="form"> -->
+          <form
+            action="/signIn"
+            method="POST"
+            class="form mb-2"
+            id="signInForm"
+          >
+            <!-- <form class="form"> -->
             <div class="form-group">
               <input
                 style="width: 62.5%; margin-left: 20%"
@@ -64,13 +74,22 @@
             <button class="btn btn-warning btn-lg ml-3 mr-3 mt-2" type="submit">
               Log In!
             </button>
-            <button class="btn btn-warning btn-lg mt-2" onclick="resetFormShow()">
-              Forgot Password?
+            <button
+              class="btn btn-warning btn-lg mt-2"
+              onclick="resetFormShow()"
+            >
+              Change Password?
             </button>
             <!-- <div class="btn g-signin2" data-theme="dark" data-onsuccess="onSignIn" type="submit">Click Here!</div> -->
           </form>
-          <form action="/resetPass" method="POST" class="form mb-2" id="resetForm" style="display: none;">
-          <!-- <form class="form"> -->
+          <form
+            action="/resetPass"
+            method="POST"
+            class="form mb-2"
+            id="resetForm"
+            style="display: none"
+          >
+            <!-- <form class="form"> -->
             <div class="form-group">
               <input
                 style="width: 62.5%; margin-left: 20%"
@@ -94,22 +113,23 @@
 
     <script>
       resetFormShow = () => {
-        console.log("Button Clicked!")
+        console.log("Button Clicked!");
         document.getElementById("signInForm").style.display = "none";
         document.getElementById("signInHeader").style.display = "none";
         document.getElementById("resetForm").style.display = "block";
         document.getElementById("resetHeader").style.display = "block";
-      }
+      };
     </script>
 
-<!-- 
+    <!-- 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script> -->
-<!-- 
+    <!-- TODO: Add SDKs for Firebase products that you want to use https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+    -->
+    <!-- 
 <script>
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -126,44 +146,43 @@
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
 </script> -->
-    
+
     <script>
+      //       function isUserEqual(googleUser, firebaseUser) {
+      //   if (firebaseUser) {
+      //     var providerData = firebaseUser.providerData;
+      //     for (var i = 0; i < providerData.length; i++) {
+      //       if (providerData[i].providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
+      //           providerData[i].uid === googleUser.getBasicProfile().getId()) {
+      //         // We don't need to reauth the Firebase connection.
+      //         return true;
+      //       }
+      //     }
+      //   }
+      //   return false;
+      // }
 
-//       function isUserEqual(googleUser, firebaseUser) {
-//   if (firebaseUser) {
-//     var providerData = firebaseUser.providerData;
-//     for (var i = 0; i < providerData.length; i++) {
-//       if (providerData[i].providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
-//           providerData[i].uid === googleUser.getBasicProfile().getId()) {
-//         // We don't need to reauth the Firebase connection.
-//         return true;
-//       }
-//     }
-//   }
-//   return false;
-// }
+      //       function onSignIn(googleUser) {
+      //   console.log('Google Auth Response', googleUser);
+      //   // We need to register an Observer on Firebase Auth to make sure auth is initialized.
+      //   var unsubscribe = firebase.auth().onAuthStateChanged((firebaseUser) => {
+      //     unsubscribe();
+      //     // Check if we are already signed-in Firebase with the correct user.
+      //     if (!isUserEqual(googleUser, firebaseUser)) {
+      //       // Build Firebase credential with the Google ID token.
+      //       var credential = firebase.auth.GoogleAuthProvider.credential(
+      //           googleUser.getAuthResponse().id_token);
 
-//       function onSignIn(googleUser) {
-//   console.log('Google Auth Response', googleUser);
-//   // We need to register an Observer on Firebase Auth to make sure auth is initialized.
-//   var unsubscribe = firebase.auth().onAuthStateChanged((firebaseUser) => {
-//     unsubscribe();
-//     // Check if we are already signed-in Firebase with the correct user.
-//     if (!isUserEqual(googleUser, firebaseUser)) {
-//       // Build Firebase credential with the Google ID token.
-//       var credential = firebase.auth.GoogleAuthProvider.credential(
-//           googleUser.getAuthResponse().id_token);
-
-//       // Sign in with credential from the Google user.
-//       firebase.auth().signInWithCredential(credential)
-//       .catch((error) => {
-//         console.log(error.message);
-//       });
-//     } else {
-//       console.log('User already signed-in Firebase.');
-//     }
-//   });
-// }
+      //       // Sign in with credential from the Google user.
+      //       firebase.auth().signInWithCredential(credential)
+      //       .catch((error) => {
+      //         console.log(error.message);
+      //       });
+      //     } else {
+      //       console.log('User already signed-in Firebase.');
+      //     }
+      //   });
+      // }
 
       // function onSignIn(googleUser) {
       //   var id_token = googleUser.getAuthResponse().id_token;

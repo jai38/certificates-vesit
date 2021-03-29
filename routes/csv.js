@@ -15,6 +15,7 @@ let flag = true;
 let finalNums = [];
 let rowNum = 0;
 const uploadUID = async () => {
+  let certificates = [];
   finalNums = [];
   rowNum = 0;
   const csv = fs.readFileSync(`./uploads/${fileName}`, "utf-8");
@@ -52,6 +53,7 @@ const uploadUID = async () => {
     return -1;
   }
   sheets.pop();
+  let councilEmail = fs.readFileSync("email.txt", "utf-8");
   sheets.forEach(async (c) => {
     rowNum++;
     let currentCerti = {
@@ -59,7 +61,8 @@ const uploadUID = async () => {
       UID: c[0],
       name: c[3],
       description: c[6],
-      // councilEmail,
+      studentName: c[2],
+      councilEmail: councilEmail,
     };
     if (!(c[5] && c[0] && c[3] && c[6])) {
       flag = false;
@@ -70,7 +73,6 @@ const uploadUID = async () => {
     }
     certificates.push(currentCerti);
   });
-  console.log(certificates);
   if (flag) return certificates;
   else {
     errors = [];
@@ -124,21 +126,21 @@ router.post("/", (req, res) => {
       errors.push({
         msg: `You are supposed to upload ${rowNum} certificates below`,
       });
+      fs.writeFileSync("details.txt", JSON.stringify(certificates));
       res.render("certis", { errors, count: rowNum });
       for (i = 0; i < certificates.length - 1; i++) {
         const link = `https://firebasestorage.googleapis.com/v0/b/vesit-bot-web.appspot.com/o/${certificates[i].UID}?alt=media`;
 
         // Send each row to firebase, under User/{emailID}/Certificates/{UID}
-        const month = parseInt(certificates[i].UID.slice(-9,-7));
-        let calcYear = `20`
+        const month = parseInt(certificates[i].UID.slice(-9, -7));
+        let calcYear = `20`;
         if (month > 6) {
-          calcYear += certificates[i].UID.slice(-7,-5)
+          calcYear += certificates[i].UID.slice(-7, -5);
+        } else {
+          const temp = parseInt(certificates[i].UID.slice(-7, -5)) - 1;
+          calcYear += temp.toString();
         }
-        else {
-          const temp = parseInt(certificates[i].UID.slice(-7,-5)) - 1
-          calcYear += temp.toString()
-        }
-        
+
         const certi = await db
           .doc(
             `Users/${certificates[i].email}/Certificates/${certificates[i].UID}`
@@ -148,6 +150,9 @@ router.post("/", (req, res) => {
             year: calcYear,
             description: certificates[i].description,
             link: `https://firebasestorage.googleapis.com/v0/b/certificates-vesit.appspot.com/o/${certificates[i].UID}.jpg?alt=media`,
+            studentName: certificates[i].studentName,
+            councilEmail: certificates[i].councilEmail,
+            email: certificates[i].email,
           });
       }
     } else {
