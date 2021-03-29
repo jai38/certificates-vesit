@@ -63,6 +63,7 @@ const uploadUID = async () => {
       description: c[6],
       studentName: c[2],
       councilEmail: councilEmail,
+      division: c[1],
     };
     if (!(c[5] && c[0] && c[3] && c[6])) {
       flag = false;
@@ -96,29 +97,7 @@ router.post("/", (req, res) => {
     const file = req.file;
     fileName = file.filename;
     certificates = await uploadUID();
-    /*for (i=0;i<(certificates.length-1);i++) {
-      
-      const emailID = certificates[i].email;
-      const certiUID = certificates[i].UID;
-      const certiName = certificates[i].name;
-      const certiYear = certificates[i].year;
-      const link = [];
 
-      db.collection("Users").get()
-        .then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            var certiRef = db.collection("Users").doc(doc.id);
-              certiRef.update({
-                certificates: firebase.firestore.FieldValue.arrayUnion({
-                  "UID": certiUID,
-                  "certiYear": certiYear,
-                  "name": certiName,
-                  "link": link
-                })
-              });    
-          });
-        });
-    }*/
     if (flag) {
       errors = [];
       fs.writeFileSync("count.txt", `${rowNum}`);
@@ -128,6 +107,37 @@ router.post("/", (req, res) => {
       });
       fs.writeFileSync("details.txt", JSON.stringify(certificates));
       res.render("certis", { errors, count: rowNum });
+      const etrx = ["D1E", "D6", "D11A", "D11B", "D16A", "D16B", "D6E", "D11"];
+      const extc = [
+        "D4A",
+        "D4B",
+        "D9A",
+        "D9B",
+        "D14A",
+        "D14B",
+        "D14C",
+        "D19A",
+        "D19B",
+        "D19C",
+      ];
+      const cmpn = [
+        "D2A",
+        "D2B",
+        "D2C",
+        "D7A",
+        "D7B",
+        "D7C",
+        "D12A",
+        "D12B",
+        "D12C",
+        "D17A",
+        "D17B",
+        "D17C",
+      ];
+      const inft = ["D5A", "D5B", "D10A", "D10B", "D15", "D20"];
+      const instru = ["D3", "D8", "D13", "D18"];
+      const aids = ["D1AD", "D6AD"];
+      const branch = "D";
       for (i = 0; i < certificates.length - 1; i++) {
         const link = `https://firebasestorage.googleapis.com/v0/b/vesit-bot-web.appspot.com/o/${certificates[i].UID}?alt=media`;
 
@@ -140,6 +150,17 @@ router.post("/", (req, res) => {
           const temp = parseInt(certificates[i].UID.slice(-7, -5)) - 1;
           calcYear += temp.toString();
         }
+        if (etrx.includes(certificates[i].division)) branch = "Electronics";
+        else if (extc.includes(certificates[i].division))
+          branch = "Electronics and Telecommunication";
+        else if (cmpn.includes(certificates[i].division))
+          branch = "Computer Science";
+        else if (inft.includes(certificates[i].division))
+          branch = "Information Technology";
+        else if (instru.includes(certificates[i].division))
+          branch = "Instrumentation";
+        else if (aids.includes(certificates[i].division))
+          branch = "Artificial Intelligence and Data Science";
 
         const certi = await db
           .doc(
@@ -149,6 +170,7 @@ router.post("/", (req, res) => {
             name: certificates[i].name,
             year: calcYear,
             description: certificates[i].description,
+            branch: branch,
             link: `https://firebasestorage.googleapis.com/v0/b/certificates-vesit.appspot.com/o/${certificates[i].UID}.jpg?alt=media`,
             studentName: certificates[i].studentName,
             councilEmail: certificates[i].councilEmail,
