@@ -4,8 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-  
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -22,7 +27,9 @@
       <nav class="navbar justify-content-between">
         <img src="/images/logo.png" alt="" width="60px" height="65px" />
         <!-- <form class="form-inline"> -->
-        <a class="btn btn-danger btn-lg" onclick="signOut()" href="/"> LOGOUT </a>
+        <a class="btn btn-danger btn-lg" onclick="signOut()" href="/">
+          LOGOUT
+        </a>
         <!-- </form> -->
       </nav>
 
@@ -62,53 +69,64 @@
           </form>
           <br /><br />
         </div>
-        </div>
       </div>
     </div>
-       <footer class="contact">
-        <h2 class="d-flex justify-content-center contact-text-main"> Have a Query? Contact Us</h2>
-        <hr style="background-color: crimson" />
-        <div class="container">
-            <div class="left">
-                <h3>Vivekanand Education Society's Institute Of Technology</h3> <br>
-                <h4>For reference -</h4><h5><a href="" style="color: #007bff;">Documentation</a></h5> <br>
-                <h5 style="font-size: 20px;"> <strong>Address:</strong> <br>
-                  Hashu Advani Memorial Complex, Collector's Colony <br>
-                  Chembur, Mumbai, Maharashtra 400074</h5>
-                
-            </div>
-            <div class="row">
-                <div class="contact-text col-md-12">
-                    <p>Varad Rane</p>
-                    <i class="fa fa-envelope" aria-hidden="true"> 2018.varad.rane@ves.ac.in </i>
-                    <br>
-                    <i class="fa fa-phone" aria-hidden="true"> 8082642593 </i>
-                </div>
-                <div class="contact-text col-md-12">
-                    <p>Jai Malani</p>
-                    <i class="fa fa-envelope" aria-hidden="true"> 2019jai.malani@ves.ac.in </i>
-                    <br>
-                    <i class="fa fa-phone" aria-hidden="true"> 7776939967 </i>
-                </div>
-                <div class="contact-text col-md-12">
-                    <p>Mcvean Soans</p>
-                    <i class="fa fa-envelope" aria-hidden="true"> 2019mcvean.soans@ves.ac.in </i>
-                    <br>
-                    <i class="fa fa-phone" aria-hidden="true"> 9819236390 </i>
-                </div>
-            </div>
+    <footer class="contact">
+      <h2 class="d-flex justify-content-center contact-text-main">
+        Have a Query? Contact Us
+      </h2>
+      <hr style="background-color: crimson" />
+      <div class="container">
+        <div class="left">
+          <h3>Vivekanand Education Society's Institute Of Technology</h3>
+          <br />
+          <h4>For reference -</h4>
+          <h5><a href="" style="color: #007bff">Documentation</a></h5>
+          <br />
+          <h5 style="font-size: 20px">
+            <strong>Address:</strong> <br />
+            Hashu Advani Memorial Complex, Collector's Colony <br />
+            Chembur, Mumbai, Maharashtra 400074
+          </h5>
         </div>
+        <div class="row">
+          <div class="contact-text col-md-12">
+            <p>Varad Rane</p>
+            <i class="fa fa-envelope" aria-hidden="true">
+              2018.varad.rane@ves.ac.in
+            </i>
+            <br />
+            <i class="fa fa-phone" aria-hidden="true"> 8082642593 </i>
+          </div>
+          <div class="contact-text col-md-12">
+            <p>Jai Malani</p>
+            <i class="fa fa-envelope" aria-hidden="true">
+              2019jai.malani@ves.ac.in
+            </i>
+            <br />
+            <i class="fa fa-phone" aria-hidden="true"> 7776939967 </i>
+          </div>
+          <div class="contact-text col-md-12">
+            <p>Mcvean Soans</p>
+            <i class="fa fa-envelope" aria-hidden="true">
+              2019mcvean.soans@ves.ac.in
+            </i>
+            <br />
+            <i class="fa fa-phone" aria-hidden="true"> 9819236390 </i>
+          </div>
+        </div>
+      </div>
     </footer>
     <script>
       signOut = () => {
-        fetch('/signOut', {
-          method: 'POST',
+        fetch("/signOut", {
+          method: "POST",
           headers: {
-            'Content-Type': 'text/plain;charset=UTF-8'
+            "Content-Type": "text/plain;charset=UTF-8",
           },
-          body: "Sign Out Request" // body data type must match "Content-Type" header
+          body: "Sign Out Request", // body data type must match "Content-Type" header
         });
-      }
+      };
     </script>
   </body>
 </html>

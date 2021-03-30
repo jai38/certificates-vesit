@@ -137,7 +137,7 @@ router.post("/", (req, res) => {
       const inft = ["D5A", "D5B", "D10A", "D10B", "D15", "D20"];
       const instru = ["D3", "D8", "D13", "D18"];
       const aids = ["D1AD", "D6AD"];
-      const branch = "D";
+      let branch = "D";
       for (i = 0; i < certificates.length - 1; i++) {
         const link = `https://firebasestorage.googleapis.com/v0/b/vesit-bot-web.appspot.com/o/${certificates[i].UID}?alt=media`;
 

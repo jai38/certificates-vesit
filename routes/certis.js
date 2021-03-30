@@ -23,7 +23,25 @@ const sendEmail = (details, emails, links) => {
       from: process.env.user,
       to: emails[i],
       subject: "Certificate VESIT",
-      html: `Congratulations <strong>${details[i].studentName}</strong>,<br>Name: <strong>${details[i].name}</strong><br>Details: <strong>${details[i].description}</strong><br><strong>Certificate:</strong><br><img style='width: 480px; height: 480px' src="${links[i]}"/>`,
+      html: `    <div>
+      <h3>Congratulations ${details[i].studentName}!</h3>
+      <pre style='font-family: Arial, Helvetica, sans-serif;'>
+Greetings from Certificates team!
+
+We are delighted to provide you with the certificate of <strong>${details[i].name}</strong>
+
+Your success is an inspiration to us all and we are thrilled to present you with your <strong>certificate of appreciation!</strong>
+
+To download the certificate please click on <a href="${links[i]}">this link</a> or head to your <a href="https://discord.gg/xukZP7w7zf">official VESIT student server.</a>
+Keep up the good work and we hope you join us again!
+
+<strong>Regards,</strong>
+<strong>Certificate Team,</strong>
+<strong>VESIT.</strong>
+      </pre>
+      <p>Note: This is a system generated mail, please do not reply.</p>
+      </strong><br><img style='width: 480px; height: 480px' src="${links[i]}"/>
+    </div>`,
     };
     setTimeout(() => {
       transporter.sendMail(mailOptions, (err, info) => {
