@@ -10,7 +10,7 @@ if (!firebase.apps.length) {
     apiKey: process.env.apiKey,
     authDomain: process.env.authDomain,
     projectId: process.env.projectId,
-    storageBucket: process.env.storageBucket,
+    storageBucket: process.env.bucket,
     messagingSenderId: process.env.messagingSenderId,
     appId: process.env.appId,
   };

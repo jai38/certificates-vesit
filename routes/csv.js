@@ -63,7 +63,7 @@ const uploadUID = async () => {
       description: c[6],
       studentName: c[2],
       councilEmail: councilEmail,
-      division: c[1],
+      division: c[1].replace(/[ ]/g, ""),
     };
     if (!(c[5] && c[0] && c[3] && c[6])) {
       flag = false;
@@ -107,7 +107,17 @@ router.post("/", (req, res) => {
       });
       fs.writeFileSync("details.txt", JSON.stringify(certificates));
       res.render("certis", { errors, count: rowNum });
-      const etrx = ["D1E", "D6", "D11A", "D11B", "D16A", "D16B", "D6E", "D11"];
+      const etrx = [
+        "D1E",
+        "D1",
+        "D6",
+        "D11A",
+        "D11B",
+        "D16A",
+        "D16B",
+        "D6E",
+        "D11",
+      ];
       const extc = [
         "D4A",
         "D4B",
@@ -137,8 +147,9 @@ router.post("/", (req, res) => {
       const inft = ["D5A", "D5B", "D10A", "D10B", "D15", "D20"];
       const instru = ["D3", "D8", "D13", "D18"];
       const aids = ["D1AD", "D6AD"];
+      const mca = ["MCA1A", "MCA1B", "MCA2A", "MCA2B", "MCA3A", "MCA3B"];
       let branch = "D";
-      for (i = 0; i < certificates.length - 1; i++) {
+      for (i = 0; i < certificates.length; i++) {
         const link = `https://firebasestorage.googleapis.com/v0/b/vesit-bot-web.appspot.com/o/${certificates[i].UID}?alt=media`;
 
         // Send each row to firebase, under User/{emailID}/Certificates/{UID}
@@ -161,7 +172,8 @@ router.post("/", (req, res) => {
           branch = "Instrumentation";
         else if (aids.includes(certificates[i].division))
           branch = "Artificial Intelligence and Data Science";
-
+        else if (mca.includes(certificates[i].division))
+          branch = "Masters in Computer Applications";
         const certi = await db
           .doc(
             `Users/${certificates[i].email}/Certificates/${certificates[i].UID}`
