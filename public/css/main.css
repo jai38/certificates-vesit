@@ -83,3 +83,42 @@ h4 {
 form {
   text-align: center;
 }
+
+/* contact us */
+.contact {
+  background-color: #ffbf47 !important;
+  color: #000;
+  font-family: "Quicksand", sans-serif;
+  margin-top: 2rem;
+}
+
+.contact-text-main {
+  padding-top: 10px;
+  font-size: 1.7rem;
+  text-decoration-style: solid;
+  font-weight: bold;
+}
+
+.contact-text {
+  float: right;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+.contact-text p{
+  margin-bottom: 0;
+  margin-top: 5px;
+  margin-left: 25px;
+}
+.row{
+  margin-left: 750px;
+  margin-top: -300px;
+}
+.left{
+  width: 40%;
+}
+footer {
+  clear: both;
+  position: relative;
+  height: 380px;
+  /* margin-top: -200px; */
+}
