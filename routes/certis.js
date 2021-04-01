@@ -22,7 +22,7 @@ const sendEmail = (details, emails, links) => {
     let mailOptions = {
       from: process.env.user,
       to: emails[i],
-      subject: "Certificate VESIT",
+      subject: `Certificate for ${details[i].name}`,
       html: `    <div>
       <h3>Congratulations ${details[i].studentName}!</h3>
       <pre style='font-family: Arial, Helvetica, sans-serif;'>
