@@ -52,27 +52,33 @@ const uploadUID = async () => {
     });
     return -1;
   }
-  sheets.pop();
+  // if (sheets[sheets.length - 1] && sheets[sheets.length - 1].email) {
+  //   console.log("inside");
+  //   sheets.pop();
+  // }
+  // console.log(sheets);
   let councilEmail = fs.readFileSync("email.txt", "utf-8");
   sheets.forEach(async (c) => {
-    rowNum++;
-    let currentCerti = {
-      email: c[5],
-      UID: c[0],
-      name: c[3],
-      description: c[6],
-      studentName: c[2],
-      councilEmail: councilEmail,
-      division: c[1].replace(/[ ]/g, ""),
-    };
-    if (!(c[5] && c[0] && c[3] && c[6])) {
-      flag = false;
-      finalNums.push(rowNum + 1);
-    } else if (c[5] == "" || c[0] == "" || c[3] == "" || c[6] == "") {
-      flag = false;
-      finalNums.push(rowNum + 1);
+    if (c[5]) {
+      rowNum++;
+      let currentCerti = {
+        email: c[5],
+        UID: c[0],
+        name: c[3],
+        description: c[6],
+        studentName: c[2],
+        councilEmail: councilEmail,
+        division: c[1].replace(/[ ]/g, ""),
+      };
+      if (!(c[5] && c[0] && c[3] && c[6])) {
+        flag = false;
+        finalNums.push(rowNum + 1);
+      } else if (c[5] == "" || c[0] == "" || c[3] == "" || c[6] == "") {
+        flag = false;
+        finalNums.push(rowNum + 1);
+      }
+      certificates.push(currentCerti);
     }
-    certificates.push(currentCerti);
   });
   if (flag) return certificates;
   else {
