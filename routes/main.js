@@ -26,7 +26,7 @@ router.get("/", (req, res) => {
 const getAccess = (email) => {
   for (let i = 0; i < users.length; i++) {
     if (users[i] == email) {
-      access = true;
+      return true;
     }
   }
 };
@@ -36,6 +36,7 @@ router.post("/signIn", async (req, res) => {
   let access = false;
   try {
     access = await getAccess(email);
+    console.log(access);
     // firebase.auth().sendPasswordResetEmail(email);
     if (access) {
       firebase
@@ -46,8 +47,7 @@ router.post("/signIn", async (req, res) => {
           if (currentEmail.length > 5) {
             errors = [];
             errors.push({
-              msg:
-                "Someone is already uploading certificates please try again after sometime",
+              msg: `${currentEmail} is already uploading certificates please try again after sometime`,
             });
             res.render("main", { errors });
             return;

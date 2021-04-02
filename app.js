@@ -2,23 +2,7 @@ const express = require("express");
 const path = require("path");
 const app = express();
 const dotenv = require("dotenv").config();
-console.log(JSON.parse(process.env.users));
-let users = [
-  "2019jai.malani@ves.ac.in",
-  "2017.nilesh.talreja@ves.ac.in",
-  "2018.varad.rane@ves.ac.in",
-  "2019mcvean.soans@ves.ac.in",
-  "tinkers_codecell.cmpn@ves.ac.in",
-  "cultural.vesit@ves.ac.in",
-  "sort.vesit@ves.ac.in",
-  "vesit.studentcouncil@ves.ac.in",
-  "sport.vesit@ves.ac.in",
-  "musiccouncil.vesit@ves.ac.in",
-  "iste.vesit@ves.ac.in",
-  "csi.vesit@ves.ac.in",
-  "isa.vesit@ves.ac.in",
-  "ieee.vesit@ves.ac.in",
-];
+// console.log(JSON.parse(process.env.users));
 // console.log(JSON.stringify(users));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
