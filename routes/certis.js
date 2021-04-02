@@ -16,22 +16,22 @@ let transporter = nodemailer.createTransport({
   },
 });
 let errors = [];
-const sendEmail = (details, emails, links) => {
-  for (let i = 0; i < emails.length; i++) {
+const waitForEmail = (detail, email, link, i) => {
+  setTimeout(() => {
     let mailOptions = {
       from: process.env.user,
-      to: emails[i],
-      subject: `Certificate for ${details[i].name}`,
+      to: email,
+      subject: `Certificate for ${detail.name}`,
       html: `    <div>
-      <h3>Congratulations ${details[i].studentName}!</h3>
+      <h3>Congratulations ${detail.studentName}!</h3>
       <pre style='font-family: Arial, Helvetica, sans-serif;'>
 Greetings from Certificates team!
 
-We are delighted to provide you with the certificate of <strong>${details[i].name}</strong>
+We are delighted to provide you with the certificate of <strong>${detail.name}</strong>
 
 Your success is an inspiration to us all and we are thrilled to present you with your <strong>certificate of appreciation!</strong>
 
-To download the certificate please click on <a href="${links[i]}">this link</a> or head to your <a href="https://discord.gg/xukZP7w7zf">official VESIT student server.</a>
+To download the certificate please click on <a href="${link}">this link</a> or head to your <a href="https://discord.gg/xukZP7w7zf">official VESIT student server.</a>
 Keep up the good work and we hope you join us again!
 
 <strong>Regards,</strong>
@@ -39,18 +39,21 @@ Keep up the good work and we hope you join us again!
 <strong>VESIT.</strong>
       </pre>
       <p>Note: This is a system generated mail, please do not reply.</p>
-      </strong><br><img style='width: 480px; height: 480px' src="${links[i]}"/>
+      </strong><br><img style='width: 480px; height: 480px' src="${link}"/>
     </div>`,
     };
-    setTimeout(() => {
-      transporter.sendMail(mailOptions, (err, info) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("Email Sent: " + info.response);
-        }
-      });
-    }, 5000);
+    transporter.sendMail(mailOptions, (err, info) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Email Sent: " + info.response);
+      }
+    });
+  }, 3000 * i);
+};
+const sendEmail = (details, emails, links) => {
+  for (let i = 0; i < emails.length; i++) {
+    waitForEmail(details[i], emails[i], links[i], i);
   }
 };
 router.get("/", (req, res) => {
