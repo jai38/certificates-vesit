@@ -94,7 +94,7 @@ router.post("/", (req, res) => {
       details.forEach((c) => {
         emails.push(c.email);
         links.push(
-          `https://firebasestorage.googleapis.com/v0/b/certificates-vesit.appspot.com/o/${c.UID}.jpg?alt=media`
+          `https://firebasestorage.googleapis.com/v0/b/certificates-vesit.appspot.com/o/${c.uidjpg}?alt=media`
         );
       });
       sendEmail(details, emails, links);
