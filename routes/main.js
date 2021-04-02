@@ -23,19 +23,21 @@ if (!firebase.apps.length) {
 router.get("/", (req, res) => {
   res.render("main");
 });
-
-router.post("/signIn", (req, res) => {
+const getAccess = (email) => {
+  for (let i = 0; i < users.length; i++) {
+    if (users[i] == email) {
+      access = true;
+    }
+  }
+};
+router.post("/signIn", async (req, res) => {
   const { email, password } = req.body;
   let errors = [];
-
+  let access = false;
   try {
-    const name = email.split(".");
-    let user = name[0];
-    user = users[user];
-    console.log(email);
-    console.log(user);
+    access = await getAccess(email);
     // firebase.auth().sendPasswordResetEmail(email);
-    if (user.email == email) {
+    if (access) {
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
@@ -48,10 +50,12 @@ router.post("/signIn", (req, res) => {
                 "Someone is already uploading certificates please try again after sometime",
             });
             res.render("main", { errors });
+            return;
+          } else {
+            console.log("Successful Sign In");
+            fs.writeFileSync("email.txt", email);
+            res.render("csv");
           }
-          console.log("Successful Sign In");
-          fs.writeFileSync("email.txt", email);
-          res.render("csv");
         })
         .catch((error) => {
           console.log(error);
