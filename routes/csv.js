@@ -60,6 +60,7 @@ const uploadUID = async () => {
       email: c[5],
       UID: c[0],
       name: c[3],
+      uidjpg: c[4],
       description: c[6],
       studentName: c[2],
       councilEmail: councilEmail,
@@ -150,7 +151,6 @@ router.post("/", (req, res) => {
       const mca = ["MCA1A", "MCA1B", "MCA2A", "MCA2B", "MCA3A", "MCA3B"];
       let branch = "D";
       for (i = 0; i < certificates.length; i++) {
-        const link = `https://firebasestorage.googleapis.com/v0/b/vesit-bot-web.appspot.com/o/${certificates[i].UID}?alt=media`;
 
         // Send each row to firebase, under User/{emailID}/Certificates/{UID}
         const month = parseInt(certificates[i].UID.slice(-9, -7));
@@ -183,7 +183,7 @@ router.post("/", (req, res) => {
             year: calcYear,
             description: certificates[i].description,
             branch: branch,
-            link: `https://firebasestorage.googleapis.com/v0/b/certificates-vesit.appspot.com/o/${certificates[i].UID}.jpg?alt=media`,
+            link: `https://firebasestorage.googleapis.com/v0/b/certificates-vesit.appspot.com/o/${certificates[i].uidjpg}?alt=media`,
             studentName: certificates[i].studentName,
             councilEmail: certificates[i].councilEmail,
             email: certificates[i].email,
