@@ -7,6 +7,9 @@ const dotenv = require("dotenv").config();
 const admin = require("./../firebase-admin");
 // Handle for Cloud Firsestore
 const db = admin.firestore();
+db.settings({
+  ignoreUndefinedProperties: true,
+});
 let sheets = [];
 let certificates = []; // Initialize JSON array
 let fileName;
@@ -16,6 +19,7 @@ let finalNums = [];
 let rowNum = 0;
 const uploadUID = async (councilEmail) => {
   let certificates = [];
+  // console.log(councilEmail);
   finalNums = [];
   rowNum = 0;
   const csv = fs.readFileSync(`./uploads/${fileName}`, "utf-8");
@@ -52,12 +56,6 @@ const uploadUID = async (councilEmail) => {
     });
     return -1;
   }
-  // if (sheets[sheets.length - 1] && sheets[sheets.length - 1].email) {
-  //   console.log("inside");
-  //   sheets.pop();
-  // }
-  // console.log(sheets);
-  console.log(councilEmail);
   sheets.forEach(async (c) => {
     if (c[5]) {
       rowNum++;
@@ -104,6 +102,7 @@ router.post("/", (req, res) => {
     let councilEmail = req.body.email;
     const file = req.file;
     fileName = file.filename;
+    console.log(councilEmail);
     certificates = await uploadUID(councilEmail);
 
     if (flag) {
@@ -182,6 +181,7 @@ router.post("/", (req, res) => {
           branch = "Artificial Intelligence and Data Science";
         else if (mca.includes(certificates[i].division))
           branch = "Masters in Computer Applications";
+        // console.log(certificates[i]);
         const certi = await db
           .doc(
             `Users/${certificates[i].email}/Certificates/${certificates[i].UID}`
