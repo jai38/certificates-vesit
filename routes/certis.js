@@ -99,6 +99,7 @@ router.post("/", (req, res) => {
       });
       sendEmail(details, emails, links);
       res.render("main", { errors });
+      fs.writeFileSync("email.txt", "");
     }
   });
 });

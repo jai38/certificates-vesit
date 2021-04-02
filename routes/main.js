@@ -26,7 +26,7 @@ router.get("/", (req, res) => {
 
 router.post("/signIn", (req, res) => {
   const { email, password } = req.body;
-  const errors = [];
+  let errors = [];
 
   try {
     const name = email.split(".");
@@ -40,12 +40,21 @@ router.post("/signIn", (req, res) => {
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
+          currentEmail = fs.readFileSync("email.txt", "utf-8");
+          if (currentEmail.length > 5) {
+            errors = [];
+            errors.push({
+              msg:
+                "Someone is already uploading certificates please try again after sometime",
+            });
+            res.render("main", { errors });
+          }
           console.log("Successful Sign In");
           fs.writeFileSync("email.txt", email);
           res.render("csv");
         })
         .catch((error) => {
-          // console.log(error.message);
+          console.log(error);
           errors.push({ msg: "Invalid VES email or password" });
           res.render("main", { errors });
         });
@@ -65,6 +74,7 @@ router.post("/signOut", (req, res) => {
     .signOut()
     .then(() => {
       console.log("Successful Sign Out");
+      fs.writeFileSync("email.txt", "");
     })
     .catch((error) => {
       console.log(error.message);
