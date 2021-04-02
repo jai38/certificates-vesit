@@ -14,7 +14,7 @@ let errors = [];
 let flag = true;
 let finalNums = [];
 let rowNum = 0;
-const uploadUID = async () => {
+const uploadUID = async (councilEmail) => {
   let certificates = [];
   finalNums = [];
   rowNum = 0;
@@ -57,7 +57,7 @@ const uploadUID = async () => {
   //   sheets.pop();
   // }
   // console.log(sheets);
-  let councilEmail = fs.readFileSync("email.txt", "utf-8");
+  console.log(councilEmail);
   sheets.forEach(async (c) => {
     if (c[5]) {
       rowNum++;
@@ -101,19 +101,22 @@ router.post("/", (req, res) => {
   }).single("csv");
 
   uploadCertis(req, res, async (err) => {
+    let councilEmail = req.body.email;
     const file = req.file;
     fileName = file.filename;
-    certificates = await uploadUID();
+    certificates = await uploadUID(councilEmail);
 
     if (flag) {
       errors = [];
-      fs.writeFileSync("count.txt", `${rowNum}`);
       errors = [];
       errors.push({
         msg: `You are supposed to upload ${rowNum} certificates below`,
       });
-      fs.writeFileSync("details.txt", JSON.stringify(certificates));
-      res.render("certis", { errors, count: rowNum });
+      res.render("certis", {
+        errors,
+        count: rowNum,
+        details: JSON.stringify(certificates),
+      });
       const etrx = [
         "D1E",
         "D1",

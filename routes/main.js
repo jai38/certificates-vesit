@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const dotenv = require("dotenv").config();
 const users = JSON.parse(process.env.users);
-const fs = require("fs");
 const firebase = require("firebase/app");
 require("firebase/auth");
 
@@ -44,20 +43,9 @@ router.post("/signIn", async (req, res) => {
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
-          currentEmail = fs.readFileSync("email.txt", "utf-8");
-          if (currentEmail.length > 5) {
-            errors = [];
-            errors.push({
-              msg: `${currentEmail} is already uploading certificates please try again after sometime`,
-            });
-            res.render("main", { errors });
-            return;
-          } else {
-            console.log("Successful Sign In");
-            console.log(email);
-            fs.writeFileSync("email.txt", email);
-            res.render("csv");
-          }
+          console.log("Successful Sign In");
+          console.log(email);
+          res.render("csv", { email });
         })
         .catch((error) => {
           console.log(error);
@@ -80,7 +68,6 @@ router.post("/signOut", (req, res) => {
     .signOut()
     .then(() => {
       console.log("Successful Sign Out");
-      fs.writeFileSync("email.txt", "");
     })
     .catch((error) => {
       console.log(error.message);

@@ -54,6 +54,11 @@
                 <h4>Upload Sheet :</h4>
               </span>
               <input
+                type="email"
+                value="<%= typeof email != 'undefined' ? email : '' %>"
+                style="display: none"
+              />
+              <input
                 class="file-upload__input btalign btn-lg"
                 type="file"
                 name="csv"
@@ -77,8 +82,15 @@
       </h2>
       <hr style="background-color: crimson" />
       <div class="container">
-        <div class="left">     
-          <h4><a href="https://drive.google.com/drive/folders/1C8CQ3GDq7U87A_7XK_DA7fhHDKz1TCvB?usp=sharing" style="color: #007bff">Click Here</a> to see documentation and necessary files for reference</h4>
+        <div class="left">
+          <h4>
+            <a
+              href="https://drive.google.com/drive/folders/1C8CQ3GDq7U87A_7XK_DA7fhHDKz1TCvB?usp=sharing"
+              style="color: #007bff"
+              >Click Here</a
+            >
+            to see documentation and necessary files for reference
+          </h4>
           <br />
           <h3>Vivekanand Education Society's Institute Of Technology</h3>
           <br />

@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const storage = require("../storage");
 const multer = require("multer");
-const fs = require("fs");
 
 const admin = require("./../firebase-admin");
 const defaultStorage = admin.storage();
@@ -58,22 +57,25 @@ router.get("/", (req, res) => {
   res.render("certis");
 });
 router.post("/", (req, res) => {
-  const count = fs.readFileSync("count.txt", "utf-8");
-  console.log(count);
   let uploadCertis = multer({
     storage: storage,
-  }).array("certis", parseInt(count));
+  }).array("certis");
   uploadCertis(req, res, (err) => {
+    let { details, count } = req.body;
     errors = [];
     if (err) {
-      errors.push({ msg: `You have entered more files than ${count}` });
-      res.render("certis", { errors });
+      errors.push({ msg: `Something went wrong please try again later` });
+      res.render("certis", { errors, details, count });
     }
     let files = req.files;
     if (files.length < count) {
       errors = [];
       errors.push({ msg: `You have entered less files than ${count}` });
-      res.render("certis", { errors });
+      res.render("certis", { errors, details, count });
+    } else if (files.length > count) {
+      errors = [];
+      errors.push({ msg: `You have entered more files than ${count}` });
+      res.render("certis", { errors, details, count });
     } else if (!err) {
       files.forEach((file) => {
         if (file) {
@@ -88,9 +90,9 @@ router.post("/", (req, res) => {
       });
       errors = [];
       errors.push({ msg: "All Files are uploaded sucessfully" });
-      details = JSON.parse(fs.readFileSync("details.txt", "utf-8"));
       let emails = [];
       let links = [];
+      details = JSON.parse(details);
       details.forEach((c) => {
         emails.push(c.email);
         links.push(
@@ -99,7 +101,6 @@ router.post("/", (req, res) => {
       });
       sendEmail(details, emails, links);
       res.render("main", { errors });
-      fs.writeFileSync("email.txt", "");
     }
   });
 });
