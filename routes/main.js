@@ -29,6 +29,7 @@ const getAccess = (email) => {
       return true;
     }
   }
+  return false;
 };
 router.post("/signIn", async (req, res) => {
   const { email, password } = req.body;
@@ -53,6 +54,7 @@ router.post("/signIn", async (req, res) => {
             return;
           } else {
             console.log("Successful Sign In");
+            console.log(email);
             fs.writeFileSync("email.txt", email);
             res.render("csv");
           }

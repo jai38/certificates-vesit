@@ -3,7 +3,6 @@ const path = require("path");
 const app = express();
 const dotenv = require("dotenv").config();
 // console.log(JSON.parse(process.env.users));
-// console.log(JSON.stringify(users));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: false }));
