@@ -65,6 +65,7 @@ const uploadUID = async () => {
         email: c[5],
         UID: c[0],
         name: c[3],
+        uidjpg: c[4],
         description: c[6],
         studentName: c[2],
         councilEmail: councilEmail,
