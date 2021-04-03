@@ -102,7 +102,7 @@ router.post("/", (req, res) => {
           `https://firebasestorage.googleapis.com/v0/b/certificates-vesit.appspot.com/o/${c.uidjpg}?alt=media`
         );
       });
-      // sendEmail(details, emails, links);
+      sendEmail(details, emails, links);
       res.render("main", { errors });
     }
   });
