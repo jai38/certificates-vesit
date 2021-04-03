@@ -65,6 +65,7 @@ router.post("/", (req, res) => {
   }).array("certis");
   uploadCertis(req, res, (err) => {
     let { details, count } = req.body;
+    console.log(count);
     errors = [];
     if (err) {
       errors.push({ msg: `Something went wrong please try again later` });
