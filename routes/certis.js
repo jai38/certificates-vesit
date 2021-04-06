@@ -83,17 +83,22 @@ const updateCertis = async (certificates) => {
     else if (mca.includes(certificates[i].division))
       branch = "Masters in Computer Applications";
     await db
-      .doc(`Users/${certificates[i].email}/Certificates/${certificates[i].UID}`)
+      .doc(`Test/${certificates[i].email}/Certificates/${certificates[i].UID}`)
       .set({
         name: certificates[i].name,
         year: calcYear,
         description: certificates[i].description,
         branch: branch,
+        fileName: certificates[i].uidjpg,
         link: `https://firebasestorage.googleapis.com/v0/b/certificates-vesit.appspot.com/o/${certificates[i].uidjpg}?alt=media`,
         studentName: certificates[i].studentName,
         councilEmail: certificates[i].councilEmail,
         email: certificates[i].email,
         UID: certificates[i].UID,
+        timestamp: admin.firestore.Timestamp.fromDate(
+          new Date(Date.now())
+        ).toDate(),
+        // .toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
       });
   }
 };
@@ -185,7 +190,7 @@ router.post("/", (req, res) => {
         );
       });
       updateCertis(details);
-      sendEmail(details, emails, links);
+      // sendEmail(details, emails, links);
       res.render("main", { errors });
     }
   });

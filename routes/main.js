@@ -22,6 +22,11 @@ if (!firebase.apps.length) {
 }
 
 router.get("/", (req, res) => {
+  console.log(
+    admin.firestore.Timestamp.fromDate(new Date(Date.now()))
+      .toDate()
+      .toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })
+  );
   res.render("main");
 });
 const getAccess = (email) => {
@@ -48,12 +53,21 @@ router.post("/signIn", async (req, res) => {
           console.log("Successful Sign In");
           await db
             .collectionGroup("Certificates")
-            .where("councilEmail", "==", "isa.vesit@ves.ac.in")
+            .where("councilEmail", "==", email)
             .get()
             .then((snap) => {
               let allUsers = [];
               snap.docs.forEach((c) => {
-                let user = { ...c.data(), UID: c.id };
+                let user = {
+                  ...c.data(),
+                  timestamp: c
+                    .data()
+                    .timestamp.toDate()
+                    .toLocaleString("en-IN", {
+                      timeZone: "Asia/Kolkata",
+                    }),
+                  UID: c.id,
+                };
                 allUsers.push(user);
               });
               res.render("dashboard", {

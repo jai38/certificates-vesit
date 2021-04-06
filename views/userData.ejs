@@ -11,7 +11,7 @@
       crossorigin="anonymous"
     />
     <title>Certificates VESIT</title>
-     <style media="screen">
+    <style media="screen">
       body {
         overflow-x: hidden;
       }
@@ -84,25 +84,6 @@
     <script src="clientJS/userData.js"></script>
   </head>
   <body onload="getData()">
-    Council Email:
-    <p id="email"></p>
-    <table id="users">
-      <thead class="table table-bordered">
-        <tr>
-          <th>timestamp</th>
-          <th>UID</th>
-          <th>Email</th>
-          <th>Name</th>
-          <th>Branch</th>
-          <th>Certificate_Year</th>
-          <th>Certificate_Name</th>
-          <th>Link</th>
-        </tr>
-      </thead>
-      <tbody id="tableBody"></tbody>
-    </table>
-    
-    
     <!-- navbar -->
     <nav class="navbar justify-content-between">
       <img src="/images/logo.png" alt="" width="60px" height="65px" />
@@ -111,10 +92,41 @@
     </nav>
 
     <!--For Page-->
+    Council Email:
+    <p id="email"></p>
     <div class="page">
       <div class="row">
+        <div id="confirm" style="display: none">
+          <div id="confirm-text">
+            Are you sure you want to delete this Certificate?
+          </div>
+          <button
+            onclick="document.getElementById('confirm').style.display='none';"
+          >
+            NO
+          </button>
+          <form action="/userData" method="POST">
+            <input type="text" id="currentUser" name="currentUser" />
+            <button type="submit">YES</button>
+          </form>
+        </div>
+        <table id="users">
+          <thead class="table table-bordered">
+            <tr>
+              <th>timestamp</th>
+              <th>UID</th>
+              <th>Email</th>
+              <th>Name</th>
+              <th>Branch</th>
+              <th>Certificate_Year</th>
+              <th>Certificate_Name</th>
+              <th>Link</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
         <!-- From this part it will go in loop -->
-        <div class="col-sm-4">
+        <!-- <div class="col-sm-4">
           <div class="card wider shadow mb-5">
             <a href="#">
               <div class="card-body card-body-cascade text-center">
@@ -126,7 +138,7 @@
               </div>
             </a>
           </div>
-        </div>
+        </div> -->
         <!-- Till this line will be in loop -->
       </div>
     </div>
