@@ -53,7 +53,8 @@ router.post("/signIn", async (req, res) => {
             .then((snap) => {
               let allUsers = [];
               snap.docs.forEach((c) => {
-                allUsers.push(c.data());
+                let user = { ...c.data(), UID: c.id };
+                allUsers.push(user);
               });
               res.render("dashboard", {
                 email,

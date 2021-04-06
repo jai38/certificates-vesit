@@ -93,6 +93,7 @@ const updateCertis = async (certificates) => {
         studentName: certificates[i].studentName,
         councilEmail: certificates[i].councilEmail,
         email: certificates[i].email,
+        UID: certificates[i].UID,
       });
   }
 };

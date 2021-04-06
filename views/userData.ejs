@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <title>Certificates VESIT</title>
+    <script src="clientJS/userData.js"></script>
+  </head>
+  <body onload="getData()">
+    Council Email:
+    <p id="email"></p>
+    <table id="users">
+      <thead class="table table-bordered">
+        <tr>
+          <th>timestamp</th>
+          <th>UID</th>
+          <th>Email</th>
+          <th>Name</th>
+          <th>Branch</th>
+          <th>Certificate_Year</th>
+          <th>Certificate_Name</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </body>
+</html>
