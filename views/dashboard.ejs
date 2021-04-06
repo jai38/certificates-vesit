@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body onload="getData()">
+    dashboard
+    <!-- these input fields are used for backend keep them as it is -->
+    <input
+      type="text"
+      name="allUsers"
+      id="allUsers"
+      style="display: none"
+      value="<%= typeof allUsers != 'undefined' ? allUsers: '' %> "
+    />
+    <input
+      type="text"
+      name="email"
+      id="email"
+      style="display: none"
+      value="<%= typeof email != 'undefined' ? email: '' %> "
+    />
+    <a href="/csv">uplaod new</a>
+    <a href="/userData">get all uploaded details</a>
+    <script src="clientJS/dashboard.js"></script>
+  </body>
+</html>

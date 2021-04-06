@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="/css/upload.css" type="text/css" />
     <title>Certificate VESIT</title>
   </head>
-  <body>
+  <body onload="getData()">
     <!-- Upload page -->
     <div class="uploadPage">
       <nav class="navbar justify-content-between">
@@ -56,6 +56,7 @@
               <input
                 type="email"
                 name="email"
+                id="email"
                 value="<%= typeof email != 'undefined' ? email : '' %>"
                 style="display: none"
               />
@@ -130,6 +131,9 @@
       </div>
     </footer>
     <script>
+      getData = () => {
+        document.getElementById("email").value = localStorage.getItem("email");
+      };
       signOut = () => {
         fetch("/signOut", {
           method: "POST",

@@ -2,6 +2,8 @@ const router = require("express").Router();
 const dotenv = require("dotenv").config();
 const users = JSON.parse(process.env.users);
 const firebase = require("firebase/app");
+const admin = require("./../firebase-admin");
+const db = admin.firestore();
 require("firebase/auth");
 
 if (!firebase.apps.length) {
@@ -42,10 +44,22 @@ router.post("/signIn", async (req, res) => {
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
+        .then(async (userCredential) => {
           console.log("Successful Sign In");
-          console.log(email);
-          res.render("csv", { email });
+          await db
+            .collectionGroup("Certificates")
+            .where("councilEmail", "==", "isa.vesit@ves.ac.in")
+            .get()
+            .then((snap) => {
+              let allUsers = [];
+              snap.docs.forEach((c) => {
+                allUsers.push(c.data());
+              });
+              res.render("dashboard", {
+                email,
+                allUsers: JSON.stringify(allUsers),
+              });
+            });
         })
         .catch((error) => {
           console.log(error);

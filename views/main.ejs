@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="/css/main.css" type="text/css" />
     <title>Certificate VESIT</title>
   </head>
-  <body>
+  <body onload="resetData()">
     <!-- Sign in page -->
     <div class="loginPage">
       <nav class="navbar justify-content-between">
@@ -124,6 +124,9 @@
     </div>
 
     <script>
+      resetData = () => {
+        localStorage.clear();
+      };
       resetFormShow = () => {
         console.log("Button Clicked!");
         document.getElementById("signInForm").style.display = "none";
