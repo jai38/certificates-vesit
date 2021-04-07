@@ -4,11 +4,86 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard</title>
-   
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+     rel="stylesheet"
+     href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+     crossorigin="anonymous"
+   />
+   <title>Dashboard</title>
+    <style media="screen">
+      body {
+        overflow-x: hidden;
+      }
+      .navbar {
+        background-color: #ffbf47;
+      }
+      .tit{
+        color: #a0522d;
+        text-align: center;
+        font-size: 2.7rem;
+        /* margin-top: 3%; */
+        text-transform: uppercase;
+      }
+      .buts{
+        align-items: center;
+        margin: 10% 30%;
+      }
+      .but1{
+        margin-left: 5%;
+        margin-right: 15%;
+      }
+      /* contact us */
+      .contact {
+        background-color: #ffbf47 !important;
+        color: #000;
+        font-family: "Quicksand", sans-serif;
+        margin-top: 2rem;
+      }
+      .contact-text-main {
+        padding-top: 10px;
+        font-size: 1.7rem;
+        text-decoration-style: solid;
+        font-weight: bold;
+      }
+      .contact-text {
+        float: right;
+        font-size: 1.3rem;
+        font-weight: 500;
+      }
+      .contact-text p {
+        margin-bottom: 0;
+        margin-top: 5px;
+        margin-left: 25px;
+      }
+      .row1 {
+        margin-left: 750px;
+        margin-top: -300px;
+      }
+      .left {
+        width: 40%;
+      }
+      footer {
+        clear: both;
+        position: relative;
+        height: 380px;
+      }
+    </style>
+
   </head>
   <body onload="getData()">
-    dashboard
+    <!-- navbar -->
+    <nav class="navbar justify-content-between">
+      <img src="/images/logo.png" alt="" width="60px" height="65px" />
+      <h2 class="tit">Dashboard</h2>
+      <a class="btn btn-danger btn-lg" onclick="signOut()" href="/"> LOGOUT </a>
+    </nav>
     <!-- these input fields are used for backend keep them as it is -->
     <input
       type="text"
@@ -24,9 +99,79 @@
       style="display: none"
       value="<%= typeof email != 'undefined' ? email: '' %> "
     />
-    <a href="/csv">uplaod new</a>
-    <a href="/userData">get all uploaded details</a>
+
+    <div class="buts">
+      <a href="/csv"><button type="button" class="but1 btn btn-success btn-lg" name="button">Upload new</button></a>
+      <a href="/userData"><button type="button" class="btn btn-success btn-lg" name="button">Get all uploaded details</button></a>
+    </div>
+
+        <!-- footer -->
+        <footer class="contact">
+          <h2 class="d-flex justify-content-center contact-text-main">
+            Have a Query? Contact Us
+          </h2>
+          <hr style="background-color: crimson" />
+          <div class="container">
+            <div class="left">
+              <h4>
+                <a
+                  href="https://drive.google.com/drive/folders/1C8CQ3GDq7U87A_7XK_DA7fhHDKz1TCvB?usp=sharing"
+                  style="color: #007bff"
+                  >Click Here</a
+                >
+                to see documentation and necessary files for reference
+              </h4>
+              <br />
+              <h3>Vivekanand Education Society's Institute Of Technology</h3>
+
+              <br />
+              <h5 style="font-size: 20px">
+                <strong>Address:</strong> <br />
+                Hashu Advani Memorial Complex, Collector's Colony <br />
+                Chembur, Mumbai, Maharashtra 400074
+              </h5>
+            </div>
+            <div class="row row1">
+              <div class="contact-text col-md-12">
+                <p>Varad Rane</p>
+                <i class="fa fa-envelope" aria-hidden="true">
+                  2018.varad.rane@ves.ac.in
+                </i>
+                <br />
+                <br />
+              </div>
+              <div class="contact-text col-md-12">
+                <p>Jai Malani</p>
+                <i class="fa fa-envelope" aria-hidden="true">
+                  2019jai.malani@ves.ac.in
+                </i>
+                <br />
+                <br />
+              </div>
+              <div class="contact-text col-md-12">
+                <p>Mcvean Soans</p>
+                <i class="fa fa-envelope" aria-hidden="true">
+                  2019mcvean.soans@ves.ac.in
+                </i>
+                <br />
+              </div>
+            </div>
+          </div>
+        </footer>
+
+        <script>
+          signOut = () => {
+            fetch("/signOut", {
+              method: "POST",
+              headers: {
+                "Content-Type": "text/plain;charset=UTF-8",
+              },
+              body: "Sign Out Request", // body data type must match "Content-Type" header
+            });
+          };
+        </script>
+
     <script src="clientJS/dashboard.js"></script>
-    
+
   </body>
 </html>
