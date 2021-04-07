@@ -10,6 +10,12 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
+    <link
+     rel="stylesheet"
+     href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+     crossorigin="anonymous"
+   />
     <title>Certificates VESIT</title>
     <style media="screen">
       body {
@@ -19,29 +25,16 @@
         background-color: #ffbf47;
       }
       .page {
-        margin: 5% 2%;
+        margin: 2% 2%;
       }
-      a:hover {
-        text-decoration: none;
+      button{
+        margin-left: 2%;
+        margin-bottom: 2%;
       }
-      a:active {
-        text-decoration: none;
-      }
-      .card {
-        margin-left: 1%;
-        border-color: #ffbf47;
-        box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2);
-        padding: 2%;
-      }
-      h5 {
-        color: #000;
-      }
-      h2 {
-        color: #a0522d;
-        text-align: center;
-        font-size: 2.7rem;
-        /* margin-top: 3%; */
-        text-transform: uppercase;
+      .yes{
+        float: left;
+        margin-left: 100px;
+        margin-top: -63px;
       }
       /* contact us */
       .contact {
@@ -50,14 +43,12 @@
         font-family: "Quicksand", sans-serif;
         margin-top: 2rem;
       }
-
       .contact-text-main {
         padding-top: 10px;
         font-size: 1.7rem;
         text-decoration-style: solid;
         font-weight: bold;
       }
-
       .contact-text {
         float: right;
         font-size: 1.3rem;
@@ -92,56 +83,41 @@
     </nav>
 
     <!--For Page-->
-    Council Email:
-    <p id="email"></p>
+    <br><br>
     <div class="page">
-      <div class="row">
+    <h3>Council Email:</h3>
+    <p id="email"></p>
         <div id="confirm" style="display: none">
-          <div id="confirm-text">
-            Are you sure you want to delete this Certificate?
+          <div id="confirm-text" >
+            <h5>Are you sure you want to delete this Certificate?</h5>
           </div>
-          <button
+          <button class="btn btn-danger btn-md"
             onclick="document.getElementById('confirm').style.display='none';"
           >
             NO
           </button>
           <form action="/userData" method="POST">
-            <input type="text" id="currentUser" name="currentUser" />
-            <button type="submit">YES</button>
+            <input type="text" id="currentUser" name="currentUser" style="display: none"/>
+            <button class="yes btn btn-success btn-md" type="submit">YES</button>
           </form>
         </div>
-        <table id="users">
+        <table  class="table table-striped" id="users">
           <thead class="table table-bordered">
             <tr>
-              <th>timestamp</th>
-              <th>UID</th>
-              <th>Email</th>
-              <th>Name</th>
-              <th>Branch</th>
-              <th>Certificate_Year</th>
-              <th>Certificate_Name</th>
-              <th>Link</th>
+              <th scope="col">Timestamp</th>
+              <th scope="col">UID</th>
+              <th scope="col">Email</th>
+              <th scope="col">Name</th>
+              <th scope="col">Branch</th>
+              <th scope="col">Certificate_Year</th>
+              <th scope="col">Certificate_Name</th>
+              <th scope="col">Link</th>
             </tr>
           </thead>
           <tbody id="tableBody"></tbody>
         </table>
-        <!-- From this part it will go in loop -->
-        <!-- <div class="col-sm-4">
-          <div class="card wider shadow mb-5">
-            <a href="#">
-              <div class="card-body card-body-cascade text-center">
-                <h5>UID : ISA05122025729</h5>
-                <h5>Email: 2015.souvik.saha@ves.ac.in</h5>
-                <h5>Name : Souvik Saha</h5>
-                <h5>Branch : Instrumentation</h5>
-                <h5>Certificate Name : XYZAJDNCGDHWOIUTDBCGTQERTY</h5>
-              </div>
-            </a>
-          </div>
-        </div> -->
-        <!-- Till this line will be in loop -->
-      </div>
-    </div>
+        </div>
+
 
     <!-- footer -->
     <footer class="contact">
