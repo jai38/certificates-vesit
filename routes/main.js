@@ -4,6 +4,11 @@ const users = JSON.parse(process.env.users);
 const firebase = require("firebase/app");
 const admin = require("./../firebase-admin");
 const db = admin.firestore();
+const adminEmail = [
+  "2019jai.malani@ves.ac.in",
+  "2017.nilesh.talreja@ves.ac.in",
+  "2018.varad.rane@ves.ac.in",
+];
 require("firebase/auth");
 
 if (!firebase.apps.length) {
@@ -51,34 +56,60 @@ router.post("/signIn", async (req, res) => {
         .signInWithEmailAndPassword(email, password)
         .then(async (userCredential) => {
           console.log("Successful Sign In");
-          await db
-            .collectionGroup("Certificates")
-            .where("councilEmail", "==", email)
-            .get()
-            .then((snap) => {
-              let allUsers = [];
-              snap.docs.forEach((c) => {
-                let user = {
-                  ...c.data(),
-                  timestamp: c
-                    .data()
-                    .timestamp.toDate()
-                    .toLocaleString("en-IN", {
-                      timeZone: "Asia/Kolkata",
-                    }),
-                  UID: c.id,
-                };
-                allUsers.push(user);
+          if (adminEmail.includes(email)) {
+            await db
+              .collectionGroup("Certificates")
+              .get()
+              .then((snap) => {
+                let allUsers = [];
+                snap.docs.forEach((c) => {
+                  let user = {
+                    ...c.data(),
+                    // timestamp: c
+                    //   .data()
+                    //   .timestamp.toDate()
+                    //   .toLocaleString("en-IN", {
+                    //     timeZone: "Asia/Kolkata",
+                    //   }),
+                    UID: c.id,
+                  };
+                  allUsers.push(user);
+                });
+                res.render("dashboard", {
+                  email,
+                  allUsers: JSON.stringify(allUsers),
+                });
               });
-              res.render("dashboard", {
-                email,
-                allUsers: JSON.stringify(allUsers),
+          } else {
+            await db
+              .collectionGroup("Certificates")
+              .where("councilEmail", "==", email)
+              .get()
+              .then((snap) => {
+                let allUsers = [];
+                snap.docs.forEach((c) => {
+                  let user = {
+                    ...c.data(),
+                    timestamp: c
+                      .data()
+                      .timestamp.toDate()
+                      .toLocaleString("en-IN", {
+                        timeZone: "Asia/Kolkata",
+                      }),
+                    UID: c.id,
+                  };
+                  allUsers.push(user);
+                });
+                res.render("dashboard", {
+                  email,
+                  allUsers: JSON.stringify(allUsers),
+                });
               });
-            });
+          }
         })
         .catch((error) => {
           console.log(error);
-          errors.push({ msg: "Invalid VES email or password" });
+          errors.push({ msg: "Something went wrong please try later" });
           res.render("main", { errors });
         });
     } else {
