@@ -16,6 +16,7 @@ const getData = () => {
   let allUsers = JSON.parse(localStorage.getItem("allUsers"));
   let html = "";
   allUsers = allUsers.sort((a, b) => parseInt(b.year) - parseInt(a.year));
+  console.log(allUsers.length);
   allUsers.forEach((c) => {
     if (c.timestamp) {
       console.log(c.timestamp);

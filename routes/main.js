@@ -65,12 +65,11 @@ router.post("/signIn", async (req, res) => {
                 snap.docs.forEach((c) => {
                   let user = {
                     ...c.data(),
-                    // timestamp: c
-                    //   .data()
-                    //   .timestamp.toDate()
-                    //   .toLocaleString("en-IN", {
-                    //     timeZone: "Asia/Kolkata",
-                    //   }),
+                    timestamp:
+                      c.data().timestamp &&
+                      c.data().timestamp.toDate().toLocaleString("en-IN", {
+                        timeZone: "Asia/Kolkata",
+                      }),
                     UID: c.id,
                   };
                   allUsers.push(user);
@@ -90,10 +89,9 @@ router.post("/signIn", async (req, res) => {
                 snap.docs.forEach((c) => {
                   let user = {
                     ...c.data(),
-                    timestamp: c
-                      .data()
-                      .timestamp.toDate()
-                      .toLocaleString("en-IN", {
+                    timestamp:
+                      c.data().timestamp &&
+                      c.data().timestamp.toDate().toLocaleString("en-IN", {
                         timeZone: "Asia/Kolkata",
                       }),
                     UID: c.id,
