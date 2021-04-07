@@ -60,15 +60,30 @@ const updateCertis = async (certificates) => {
   const aids = ["D1AD", "D6AD"];
   const mca = ["MCA1A", "MCA1B", "MCA2A", "MCA2B", "MCA3A", "MCA3B"];
   let branch = "D";
+  let date = admin.firestore.Timestamp.fromDate(new Date(Date.now())).toDate();
+  console.log(date.getFullYear());
+  console.log(date.getMonth() + 1);
   for (let i = 0; i < certificates.length; i++) {
+    let calcYear;
+    //old method with UID
+
     const month = parseInt(certificates[i].UID.slice(-9, -7));
-    let calcYear = `20`;
     if (month > 6) {
       calcYear += certificates[i].UID.slice(-7, -5);
     } else {
       const temp = parseInt(certificates[i].UID.slice(-7, -5)) - 1;
       calcYear += temp.toString();
     }
+
+    //new method with current date
+
+    // const month = date.getMonth() + 1;
+    // if (month > 6) {
+    //   calcYear = date.getFullYear();
+    // } else {
+    //   calcYear = date.getFullYear() - 1;
+    // }
+
     if (etrx.includes(certificates[i].division)) branch = "Electronics";
     else if (extc.includes(certificates[i].division))
       branch = "Electronics and Telecommunication";
