@@ -28,8 +28,8 @@ const getData = () => {
     <td>${c.branch}</td>
     <td>${c.year}</td>
     <td>${c.name}</td>
-    <td><a href='${c.link}' target="_blank">Click Here</td>
-    <td><button onclick='deleteUser("${c.email}","${c.UID}","${c.fileName}")'>Delete</button></td>
+    <td><a class='btn btn-success' href='${c.link}' target="_blank">Certificate</td>
+    <td><button class='btn btn-danger' onclick='deleteUser("${c.email}","${c.UID}","${c.fileName}")'>Delete</button></td>
       </tr>`;
   });
   tbody.innerHTML = html;

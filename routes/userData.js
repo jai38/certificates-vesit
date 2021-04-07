@@ -11,10 +11,12 @@ router.post("/", (req, res) => {
   const { currentUser } = req.body;
   let errors = [];
   const { email, UID, fileName } = JSON.parse(currentUser);
-  console.log(fileName);
+  console.log(fileName + "is deleted");
+  //deleting from firestore
   db.doc(`Test/${email}/Certificates/${UID}`)
     .delete()
     .then(() => {
+      //deleting from bucket
       bucket
         .file(fileName)
         .delete()
@@ -33,7 +35,7 @@ router.post("/", (req, res) => {
           });
           res.render("userData");
         });
-      console.log(errors);
+      // console.log(errors);
     });
 });
 module.exports = router;

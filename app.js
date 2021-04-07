@@ -12,6 +12,7 @@ app.use("/", require("./routes/main"));
 app.use("/certis", require("./routes/certis"));
 app.use("/csv", require("./routes/csv"));
 app.use("/userData", require("./routes/userData"));
+app.use("/dashboard", require("./routes/dashboard"));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`On port ${PORT}`));
