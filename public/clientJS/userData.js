@@ -15,7 +15,7 @@ const getData = () => {
   document.getElementById("email").innerHTML = localStorage.getItem("email");
   let allUsers = JSON.parse(localStorage.getItem("allUsers"));
   let html = "";
-  allUsers = allUsers.sort((a, b) => parseInt(b.year) - parseInt(a.year));
+  allUsers = allUsers.sort((a, b) => b.email - a.email);
   console.log(allUsers.length);
   allUsers.forEach((c) => {
     if (c.timestamp) {
@@ -30,7 +30,7 @@ const getData = () => {
     <td>${c.year}</td>
     <td>${c.name}</td>
     <td><a class='btn btn-success' href='${c.link}' target="_blank">Certificate</td>
-    <td><button class='btn btn-danger' onclick='deleteUser("${c.email}","${c.UID}","${c.fileName}")'>Delete</button></td>
+    <td><button class='btn btn-danger' data-toggle="modal" data-target="#myModal" onclick='deleteUser("${c.email}","${c.UID}","${c.fileName}")'>Delete</button></td>
       </tr>`;
   });
   tbody.innerHTML = html;

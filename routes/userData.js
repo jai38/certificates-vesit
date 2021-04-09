@@ -26,14 +26,14 @@ router.post("/", (req, res) => {
             msg:
               "Certificate Deleted successfully!! Please re-login to see changes",
           });
-          res.render("userData");
+          res.render("userData", { errors });
         })
         .catch((err) => {
           errors = [];
           errors.push({
             msg: "Can't delete at this time please try later",
           });
-          res.render("userData");
+          res.render("userData", { errors });
         });
       // console.log(errors);
     });
