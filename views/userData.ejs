@@ -94,16 +94,16 @@
 
     <!--For Page-->
 
-    
+
     <div class="page">
     <a class="btn btn-danger btn-lg back" type="button" data-toggle="modal" data-target="#myModal"> Back </a>
       <h3>Council Email:</h3>
       <p id="email"></p>
-      <div id="confirm" style="display: none">
+      <div id="confirm">
           <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modalCenter">
-    
+
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -113,7 +113,7 @@
           <button
           class="btn btn-danger btn-md"
           onclick="document.getElementById('confirm').style.display='none';"
-         
+  data-dismiss="modal"
         >
           NO
         </button>
@@ -125,14 +125,14 @@
             style="display: none"
           />
           <button class="yes btn btn-success btn-md" type="submit">YES</button></br>
-        </form>        
+        </form>
       </div>
       </div>
-      
+    </div>
     </div>
   </div>
       <table class="table table-striped" id="users">
-        <thead class="table table-bordered">
+        <thead class="table table-bordered" style="font-size:2rem;">
           <tr>
             <th scope="col">Timestamp</th>
             <th scope="col">UID</th>
@@ -142,7 +142,7 @@
             <th scope="col">Certificate_Year</th>
             <th scope="col">Certificate_Name</th>
             <th scope="col">Link</th>
-            <th scope="col" type="button" data-toggle="modal" data-target="#myModal">Delete</th>
+            <th scope="col">Delete</th>
           </tr>
         </thead>
         <tbody id="tableBody"></tbody>
@@ -216,3 +216,4 @@
     </script>
   </body>
 </html>
+
