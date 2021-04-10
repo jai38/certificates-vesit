@@ -7,35 +7,36 @@ const bucket = defaultStorage.bucket();
 router.get("/", (req, res) => {
   res.render("userData");
 });
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   const { currentUser } = req.body;
   let errors = [];
   const { email, UID, fileName } = JSON.parse(currentUser);
   console.log(fileName + "is deleted");
   //deleting from firestore
-  db.doc(`Test/${email}/Certificates/${UID}`)
+  await db
+    .doc(`Users/${email}/Certificates/${UID}`)
     .delete()
     .then(() => {
       //deleting from bucket
-      bucket
-        .file(fileName)
-        .delete()
-        .then((res) => {
-          errors = [];
-          errors.push({
-            msg:
-              "Certificate Deleted successfully!! Please re-login to see changes",
-          });
-          res.render("userData", { errors });
-        })
-        .catch((err) => {
-          errors = [];
-          errors.push({
-            msg: "Can't delete at this time please try later",
-          });
-          res.render("userData", { errors });
-        });
-      // console.log(errors);
+      // bucket
+      //   .file(fileName)
+      //   .delete()
+      //   .then((r) => {
+      //     errors = [];
+      errors.push({
+        msg:
+          "Certificate Deleted successfully!! Please re-login to see changes",
+      });
+      //   });
+      res.render("userData", { errors });
+    })
+    .catch((err) => {
+      console.log(err);
+      errors = [];
+      errors.push({
+        msg: "Can't delete at this time please try later",
+      });
+      res.render("userData", { errors });
     });
 });
 module.exports = router;

@@ -98,7 +98,7 @@ const updateCertis = async (certificates) => {
     else if (mca.includes(certificates[i].division))
       branch = "Masters in Computer Applications";
     await db
-      .doc(`Test/${certificates[i].email}/Certificates/${certificates[i].UID}`)
+      .doc(`Users/${certificates[i].email}/Certificates/${certificates[i].UID}`)
       .set({
         name: certificates[i].name,
         year: calcYear,
