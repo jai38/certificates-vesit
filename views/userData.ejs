@@ -50,11 +50,11 @@
         top: 36%;
         transform: translateY(-50%);
       }
-        .alert.show {
+      .alert.show {
         margin-top: 10%;
         width: 80%;
         margin-left: 20%;
-    }
+      }
       /* contact us */
       .contact {
         background-color: #ffbf47 !important;
@@ -103,64 +103,64 @@
 
     <!--For Page-->
 
-    <div class="page">
-      <a class="btn btn-danger btn-lg back" href="/dashboard" type="button">
-        Back
-      </a>
-      <h3>Council Email:</h3>
-      <p id="email"></p>
-      <div id="confirm">
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-          <div class="modal-dialog modalCenter">
-            <!-- Modal content-->
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 id="confirm-text" class="modal-title"></h5>
-                <br />
-              </div>
-              <div class="modal-body">
-                <button
-                  class="btn btn-danger btn-md"
-                  onclick="document.getElementById('confirm').style.display='none';"
-                  data-dismiss="modal"
-                >
-                  NO
-                </button>
-                <form action="/userData" method="POST">
-                  <input
-                    type="text"
-                    id="currentUser"
-                    name="currentUser"
-                    style="display: none"
-                  />
-                  <button class="yes btn btn-success btn-md" type="submit">
-                    YES</button
-                  ><br />
-                </form>
-              </div>
+    <!-- <div class="page m-0"> -->
+    <a class="btn btn-danger btn-lg back" href="/dashboard" type="button">
+      Back
+    </a>
+    <h3>Council Email:</h3>
+    <p id="email"></p>
+    <div id="confirm">
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modalCenter">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 id="confirm-text" class="modal-title"></h5>
+              <br />
+            </div>
+            <div class="modal-body">
+              <button
+                class="btn btn-danger btn-md"
+                onclick="document.getElementById('confirm').style.display='none';"
+                data-dismiss="modal"
+              >
+                NO
+              </button>
+              <form action="/userData" method="POST">
+                <input
+                  type="text"
+                  id="currentUser"
+                  name="currentUser"
+                  style="display: none"
+                />
+                <button class="yes btn btn-success btn-md" type="submit">
+                  YES</button
+                ><br />
+              </form>
             </div>
           </div>
         </div>
       </div>
-      <%- include('./messages') %>
-      <table class="table table-striped" id="users">
-        <thead class="table table-bordered" style="font-size: 1.7rem">
-          <tr>
-            <th scope="col">Timestamp</th>
-            <th scope="col">UID</th>
-            <th scope="col">Email</th>
-            <th scope="col">Name</th>
-            <th scope="col">Branch</th>
-            <th scope="col">Certificate_Year</th>
-            <th scope="col">Certificate_Name</th>
-            <th scope="col">Link</th>
-            <th scope="col">Delete</th>
-          </tr>
-        </thead>
-        <tbody id="tableBody"></tbody>
-      </table>
     </div>
+    <%- include('./messages') %>
+    <table class="table table-striped ml-5 w-75" id="users">
+      <thead class="table table-bordered">
+        <tr>
+          <th scope="col">Timestamp</th>
+          <th scope="col">UID</th>
+          <th scope="col">Email</th>
+          <th scope="col">Name</th>
+          <th scope="col">Branch</th>
+          <th scope="col">Certificate_Year</th>
+          <th scope="col">Certificate_Name</th>
+          <th scope="col">Link</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+    <!-- </div> -->
 
     <!-- footer -->
     <footer class="contact">
