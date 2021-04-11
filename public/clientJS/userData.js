@@ -18,9 +18,6 @@ const getData = () => {
   allUsers = allUsers.sort((a, b) => b.email - a.email);
   console.log(allUsers.length);
   allUsers.forEach((c) => {
-    if (c.timestamp) {
-      console.log(c.timestamp);
-    }
     html += `<tr>
     <td>${c.timestamp}</td>
     <td>${c.UID}</td>
