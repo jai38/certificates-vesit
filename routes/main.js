@@ -25,7 +25,19 @@ if (!firebase.apps.length) {
 } else {
   firebase.app();
 }
-
+// const getYearUpdated = (email, UID, year) => {
+//   let calcYear = "20";
+//   const month = parseInt(UID.slice(-9, -7));
+//   if (month > 6) {
+//     calcYear += UID.slice(-7, -5);
+//   } else {
+//     const temp = parseInt(UID.slice(-7, -5)) - 1;
+//     calcYear += temp.toString();
+//   }
+//   db.doc(`Users/${email}/Certificates/${UID}`).update({
+//     year: calcYear,
+//   });
+// };
 router.get("/", (req, res) => {
   console.log(
     admin.firestore.Timestamp.fromDate(new Date(Date.now()))
@@ -63,6 +75,8 @@ router.post("/signIn", async (req, res) => {
               .then((snap) => {
                 let allUsers = [];
                 snap.docs.forEach((c) => {
+                  //here write any function to update in all docs
+                  // getYearUpdated(c.data().email, c.data().UID, c.data().year);
                   let user = {
                     ...c.data(),
                     timestamp:

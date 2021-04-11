@@ -128,7 +128,7 @@ const waitForEmail = (detail, email, link, i) => {
       <pre style='font-family: Arial, Helvetica, sans-serif;'>
 Greetings from Certificates team!
 
-We are delighted to provide you with the certificate of <strong>${detail.name}</strong>
+We are delighted to provide you with the certificate of <strong>${detail.name}!</strong>
 
 Your success is an inspiration to us all and we are thrilled to present you with your <strong>certificate of appreciation!</strong>
 
