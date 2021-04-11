@@ -64,7 +64,7 @@ const updateCertis = async (certificates) => {
   console.log(date.getFullYear());
   console.log(date.getMonth() + 1);
   for (let i = 0; i < certificates.length; i++) {
-    let calcYear = '20';
+    let calcYear = "20";
     //old method with UID
 
     const month = parseInt(certificates[i].UID.slice(-9, -7));
@@ -205,7 +205,7 @@ router.post("/", (req, res) => {
         );
       });
       updateCertis(details);
-      // sendEmail(details, emails, links);
+      sendEmail(details, emails, links);
       res.render("main", { errors });
     }
   });
