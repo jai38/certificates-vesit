@@ -21,13 +21,20 @@ const updateCertis = async (certificates) => {
   const etrx = [
     "D1E",
     "D1",
+    "D1A",
+    "D1B",
     "D6",
+    "D6A",
+    "D6B",
     "D11A",
     "D11B",
     "D16A",
     "D16B",
     "D6E",
     "D11",
+    "D11E",
+    "D16",
+    "D16E",
   ];
   const extc = [
     "D4A",
@@ -55,9 +62,22 @@ const updateCertis = async (certificates) => {
     "D17B",
     "D17C",
   ];
-  const inft = ["D5A", "D5B", "D10A", "D10B", "D15", "D20"];
+  const inft = [
+    "D5",
+    "D5A",
+    "D5B",
+    "D10",
+    "D10A",
+    "D10B",
+    "D15",
+    "D15A",
+    "D15B",
+    "D20",
+    "D20A",
+    "D20B",
+  ];
   const instru = ["D3", "D8", "D13", "D18"];
-  const aids = ["D1AD", "D6AD"];
+  const aids = ["D1AD", "D6AD", "D11AD", "D16AD"];
   const mca = ["MCA1A", "MCA1B", "MCA2A", "MCA2B", "MCA3A", "MCA3B"];
   let branch = "D";
   let date = admin.firestore.Timestamp.fromDate(new Date(Date.now())).toDate();
