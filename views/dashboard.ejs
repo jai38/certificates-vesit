@@ -94,7 +94,14 @@
       style="display: none"
       value="<%= typeof email != 'undefined' ? email: '' %> "
     />
-
+    <input
+      type="text"
+      name="status"
+      id="status"
+      style="display: none"
+      value="<%= typeof status != 'undefined' ? status: '' %> "
+    />
+    <%- include('messages') %>
     <div class="d-flex justify-content-around pt-4 buts">
       <a href="/csv" type="button" class="btn btn-primary btn-lg" name="button"
         >Upload new Certificates</a
@@ -103,9 +110,32 @@
         href="/userData"
         type="button"
         class="btn btn-secondary btn-lg"
-        name="button"
+        id="details-btn"
         >Uploaded Certificates details</a
       >
+      <form action="/getCsv" method="POST">
+        <div class="d-flex input-group" id="branch-dropdown">
+          <select
+            class="custom-select w-100"
+            id="inputGroupSelect04"
+            name="branch"
+          >
+            <option name="0" value="0" selected>Select Branch</option>
+            <option name="cmpn" value="1">cmpn</option>
+            <option name="inft" value="2">inft</option>
+            <option name="extc" value="3">extc</option>
+            <option name="etrx" value="4">etrx</option>
+            <option name="instru" value="5">instru</option>
+            <option name="ai" value="6">ai</option>
+            <option name="mca" value="7">mca</option>
+          </select>
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">
+              Download Csv
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
 
     <!-- footer -->

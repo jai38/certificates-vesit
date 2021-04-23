@@ -5,10 +5,11 @@ const firebase = require("firebase/app");
 const admin = require("./../firebase-admin");
 const db = admin.firestore();
 const adminEmail = [
-  "2019jai.malani@ves.ac.in",
   "2017.nilesh.talreja@ves.ac.in",
+
   "2018.varad.rane@ves.ac.in",
 ];
+const teacherEmail = ["2019jai.malani@ves.ac.in"];
 require("firebase/auth");
 
 if (!firebase.apps.length) {
@@ -90,9 +91,17 @@ router.post("/signIn", async (req, res) => {
                 });
                 res.render("dashboard", {
                   email,
+                  status: "admin",
                   allUsers: JSON.stringify(allUsers),
                 });
               });
+          } else if (teacherEmail.includes(email)) {
+            let allUsers = [];
+            res.render("dashboard", {
+              status: "teacher",
+              email,
+              allUsers: JSON.stringify(allUsers),
+            });
           } else {
             await db
               .collectionGroup("Certificates")
@@ -114,6 +123,7 @@ router.post("/signIn", async (req, res) => {
                 });
                 res.render("dashboard", {
                   email,
+                  status: "council",
                   allUsers: JSON.stringify(allUsers),
                 });
               });
