@@ -31,19 +31,20 @@
         /* margin-top: 3%; */
         text-transform: uppercase;
       }
-            .buts {
+      .buts {
         margin-top: 10%;
         padding-bottom: 10%;
       }
       div#branch-dropdown {
-        width: 252.86px;
+        width: 242.86px;
+        margin-left: -19%;
       }
       select#inputGroupSelect04 {
           height: 48px;
       }
       .down{
-        margin-top: -8.5%;
-        margin-left: 79%;
+        margin-top: -19.5%;
+        margin-left: 100%;
       }
       /* contact us */
       .contact {
@@ -112,6 +113,8 @@
       value="<%= typeof status != 'undefined' ? status: '' %> "
     />
     <%- include('messages') %>
+
+
     <div class="d-flex justify-content-around pt-4 buts">
       <a href="/csv" type="button" class="btn btn-primary btn-lg" name="button"
         >Upload new Certificates</a
@@ -123,6 +126,7 @@
         id="details-btn"
         >Uploaded Certificates details</a
       >
+      <div class="">
       <form action="/getCsv" method="POST">
         <div class="input-group" id="branch-dropdown">
           <select
@@ -139,15 +143,17 @@
             <option name="ai" value="6">ai</option>
             <option name="mca" value="7">mca</option>
           </select>
+          <div class="input-group-append down">
+            <button class="btn btn-outline-info" type="submit">
+              Download Csv
+            </button>
+          </div>
         </div>
       </form>
     </div>
 
-    <div class="input-group-append down">
-      <button class="btn btn-outline-info" type="submit">
-        Download Csv
-      </button>
-    </div>
+
+  </div>
 
     <!-- footer -->
     <footer class="contact">
