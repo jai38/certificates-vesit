@@ -4,12 +4,11 @@ const users = JSON.parse(process.env.users);
 const firebase = require("firebase/app");
 const admin = require("./../firebase-admin");
 const db = admin.firestore();
-const adminEmail = [
+const adminEmail = ["2018.varad.rane@ves.ac.in"];
+const teacherEmail = [
+  "2019jai.malani@ves.ac.in",
   "2017.nilesh.talreja@ves.ac.in",
-
-  "2018.varad.rane@ves.ac.in",
 ];
-const teacherEmail = ["2019jai.malani@ves.ac.in"];
 require("firebase/auth");
 
 if (!firebase.apps.length) {
@@ -72,14 +71,21 @@ router.post("/signIn", async (req, res) => {
           if (adminEmail.includes(email)) {
             await db
               .collectionGroup("Certificates")
+              .orderBy("year")
+              .orderBy("branch")
+              .orderBy("councilEmail")
+              .orderBy("name")
+              .orderBy("studentName")
               .get()
               .then((snap) => {
                 let allUsers = [];
                 snap.docs.forEach((c) => {
                   //here write any function to update in all docs
                   // getYearUpdated(c.data().email, c.data().UID, c.data().year);
+                  let newYear = parseInt(c.data().year) + 1;
                   let user = {
                     ...c.data(),
+                    year: c.data().year + "-" + newYear,
                     timestamp:
                       c.data().timestamp &&
                       c.data().timestamp.toDate().toLocaleString("en-IN", {

@@ -25,12 +25,18 @@ router.post("/", async (req, res) => {
     await db
       .collectionGroup("Certificates")
       .where("branch", "==", branch)
+      .orderBy("year")
+      .orderBy("councilEmail")
+      .orderBy("name")
+      .orderBy("studentName")
       .get()
       .then((snap) => {
         let allUsers = [];
         snap.docs.forEach((c) => {
+          let newYear = parseInt(c.data().year) + 1;
           let user = {
             ...c.data(),
+            year: c.data().year + "-" + newYear,
             timestamp:
               c.data().timestamp &&
               c.data().timestamp.toDate().toLocaleString("en-IN", {
@@ -41,7 +47,16 @@ router.post("/", async (req, res) => {
           allUsers.push(user);
         });
         const csv = JSONtoCSV(allUsers, {
-          fields: ["UID", "email", "studentName", "year", "name", "link"],
+          fields: [
+            "UID",
+            "email",
+            "studentName",
+            "year",
+            "councilEmail",
+            "name",
+            "description",
+            "link",
+          ],
         });
         fs.writeFileSync(`public/${branch}.csv`, csv);
         res.send(
