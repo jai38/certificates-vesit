@@ -1,6 +1,6 @@
 const getData = () => {
   let status = document.getElementById("status").value;
-  console.log(status);
+  console.log("Year->Branch->CouncilEmail->Name->studentName");
   if (status == "teacher ") {
     document.getElementById("details-btn").style.display = "none";
     document.getElementById("branch-dropdown").style.display = "block";
