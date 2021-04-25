@@ -31,9 +31,19 @@
         /* margin-top: 3%; */
         text-transform: uppercase;
       }
-      .buts {
+            .buts {
         margin-top: 10%;
         padding-bottom: 10%;
+      }
+      div#branch-dropdown {
+        width: 252.86px;
+      }
+      select#inputGroupSelect04 {
+          height: 48px;
+      }
+      .down{
+        margin-top: -8.5%;
+        margin-left: 79%;
       }
       /* contact us */
       .contact {
@@ -116,7 +126,7 @@
       <form action="/getCsv" method="POST">
         <div class="input-group" id="branch-dropdown">
           <select
-            class="custom-select w-100"
+            class="custom-select w-10 btn btn-lg btn-info branch"
             id="inputGroupSelect04"
             name="branch"
           >
@@ -129,13 +139,14 @@
             <option name="ai" value="6">ai</option>
             <option name="mca" value="7">mca</option>
           </select>
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="submit">
-              Download Csv
-            </button>
-          </div>
         </div>
       </form>
+    </div>
+
+    <div class="input-group-append down">
+      <button class="btn btn-outline-info" type="submit">
+        Download Csv
+      </button>
     </div>
 
     <!-- footer -->
