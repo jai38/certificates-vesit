@@ -165,15 +165,13 @@ router.post("/signOut", (req, res) => {
     });
 });
 
-router.post("/resetPass", (req, res) => {
+router.post("/resetPass", async (req, res) => {
   const { email } = req.body;
   const errors = [];
 
   try {
-    const name = email.split(".");
-    let user = name[0];
-    user = users[user];
-    if (user.email == email) {
+    const access = await getAccess(email);
+    if (access) {
       firebase
         .auth()
         .sendPasswordResetEmail(email)
