@@ -40,9 +40,9 @@
         margin-left: -19%;
       }
       select#inputGroupSelect04 {
-          height: 48px;
+        height: 48px;
       }
-      .down{
+      .down {
         margin-top: -19.5%;
         margin-left: 100%;
       }
@@ -114,9 +114,13 @@
     />
     <%- include('messages') %>
 
-
     <div class="d-flex justify-content-around pt-4 buts">
-      <a href="/csv" type="button" class="btn btn-primary btn-lg" name="button"
+      <a
+        href="/csv"
+        type="button"
+        class="btn btn-primary btn-lg"
+        id="new-btn"
+        name="button"
         >Upload new Certificates</a
       >
       <a
@@ -127,33 +131,31 @@
         >Uploaded Certificates details</a
       >
       <div class="">
-      <form action="/getCsv" method="POST">
-        <div class="input-group" id="branch-dropdown">
-          <select
-            class="custom-select w-10 btn btn-lg btn-info branch"
-            id="inputGroupSelect04"
-            name="branch"
-          >
-            <option name="0" value="0" selected>Select Branch</option>
-            <option name="cmpn" value="1">cmpn</option>
-            <option name="inft" value="2">inft</option>
-            <option name="extc" value="3">extc</option>
-            <option name="etrx" value="4">etrx</option>
-            <option name="instru" value="5">instru</option>
-            <option name="ai" value="6">ai</option>
-            <option name="mca" value="7">mca</option>
-          </select>
-          <div class="input-group-append down">
-            <button class="btn btn-outline-info" type="submit">
-              Download Csv
-            </button>
+        <form action="/getCsv" method="POST">
+          <div class="input-group" id="branch-dropdown">
+            <select
+              class="custom-select w-10 btn btn-lg btn-info branch"
+              id="inputGroupSelect04"
+              name="branch"
+            >
+              <option name="0" value="0" selected>Select Branch</option>
+              <option name="cmpn" value="1">cmpn</option>
+              <option name="inft" value="2">inft</option>
+              <option name="extc" value="3">extc</option>
+              <option name="etrx" value="4">etrx</option>
+              <option name="instru" value="5">instru</option>
+              <option name="ai" value="6">ai</option>
+              <option name="mca" value="7">mca</option>
+            </select>
+            <div class="input-group-append down">
+              <button class="btn btn-outline-info" type="submit">
+                Download Csv
+              </button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
-
-
-  </div>
 
     <!-- footer -->
     <footer class="contact">

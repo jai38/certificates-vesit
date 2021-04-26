@@ -6,7 +6,7 @@ const admin = require("./../firebase-admin");
 const db = admin.firestore();
 const adminEmail = ["2018.varad.rane@ves.ac.in"];
 const teacherEmail = [
-  // "2019jai.malani@ves.ac.in",
+  "2019jai.malani@ves.ac.in",
   "2017.nilesh.talreja@ves.ac.in",
 ];
 require("firebase/auth");
